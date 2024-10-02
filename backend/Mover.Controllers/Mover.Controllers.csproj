@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mover.Presenter\Mover.Presenter.csproj" />
+    <ProjectReference Include="..\Mover.UseCasesPorts\Mover.UseCasesPorts.csproj" />
+    <ProjectReference Include="..\Mover.UseCases\Mover.UseCases.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Vehiculo\Editar\" />
+  </ItemGroup>
+
+</Project>

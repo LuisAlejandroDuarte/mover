@@ -1,0 +1,13 @@
+export 'tipoIdentificacion/tipo_identificacion_provider.dart';
+export 'tipoIdentificacion/tipo_identificacion_repository_provider.dart';
+export 'user/user_provider.dart';
+export 'user/user_repository_provider.dart';
+export 'dispositivos/dispositivo_repository_provider.dart';
+export 'clase/clase_repository_provider.dart';
+export 'categoria/categoria_provider.dart';
+export 'carroceria/carroceria_provider.dart';
+export 'marca/marca_provider.dart';
+export 'referencia/referencia_provider.dart';
+export 'modelo/modelo_provider.dart';
+export 'estadovehiculo/estado_vehiculo_provider.dart';
+export 'condicionvehiculo/condicion_vehiculo_provider.dart';

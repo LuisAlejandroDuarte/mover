@@ -1,0 +1,13 @@
+export 'user.dart';
+export 'tipo_identificacion.dart';
+export 'dispositivo.dart';
+export 'categoria.dart';
+export 'clase.dart';
+export 'oferta.dart';
+export 'ubicacion.dart';
+export 'carroceria.dart';
+export 'marca.dart';
+export 'referencia.dart';
+export 'modelo.dart';
+export 'condicion_vehiculo.dart';
+export 'estado_vehiculo.dart';

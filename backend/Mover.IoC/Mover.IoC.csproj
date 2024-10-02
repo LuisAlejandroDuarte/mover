@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mover.Controllers\Mover.Controllers.csproj" />
+    <ProjectReference Include="..\Mover.Presenter\Mover.Presenter.csproj" />
+    <ProjectReference Include="..\Mover.Repositories.EFCore\Mover.Repositories.EFCore.csproj" />
+    <ProjectReference Include="..\Mover.UseCases\Mover.UseCases.csproj" />
+  </ItemGroup>
+
+</Project>

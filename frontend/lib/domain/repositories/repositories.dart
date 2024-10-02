@@ -1,0 +1,11 @@
+export 'tipo_identificacion_repositories.dart';
+export 'user_repository.dart';
+export 'dispositivo_repositories.dart';
+export 'categoria_repositories.dart';
+export 'clase_repositories.dart';
+export 'carroceria_repositorie.dart';
+export 'marca_repositorie.dart';
+export 'referencia_repositorie.dart';
+export 'modelo_repositorie.dart';
+export 'condicion_vehiculo_repositorie.dart';
+export 'estado_vehiculo_repositorie.dart';
