@@ -79,6 +79,15 @@ using Mover.UseCasesPorts.CondicionVehiculo;
 using Mover.UseCases.CondicionVehiculo;
 using Mover.UseCasesPorts.EstadoVehiculo;
 using Mover.UseCases.EstadoVehiculo;
+using Mover.Entities.Interfaces.EstadoOferta;
+using Mover.Entities.Interfaces.ParametrosVehiculo.Get;
+using Mover.Entities.Interfaces.ZonaTransporter;
+using Mover.UseCasesPorts.EstadoOferta;
+using Mover.UseCases.EstadoOferta;
+using Mover.UseCases.ParametrosVehiculo;
+using Mover.UseCases.ZonaTransporter;
+using Mover.UseCasesPorts.ZonaTransporter;
+using Mover.UseCasesPorts.ParametrosVehiculo;
 
 
 namespace Mover.UseCases
@@ -127,6 +136,17 @@ namespace Mover.UseCases
 
             //Referencia
             services.AddTransient<IGetReferenciaByIdMarcaInPutPort, GetReferenciaByIdMarcaInteractor>();
+
+
+
+            //EstadiOferta
+            services.AddScoped<IGetAllEstadoOfertaInPutPort, GetAllEstadoOfertaInteractor>();
+
+            //ZonaTransporter
+            services.AddScoped<IGetAllZonaTransporterInPutPort, GetAllZonaTransporterInteractor>();
+
+            //ParametrosVehiculo
+            services.AddScoped<IGetAllParametrosVehiculoInPutPort, GetAllParametrosVehiculoInteractor>();
 
             //Clase
             services.AddTransient<IGetClaseByIdCategoriaInPutPort, GetClaseByIdCategoriaInteractor>();

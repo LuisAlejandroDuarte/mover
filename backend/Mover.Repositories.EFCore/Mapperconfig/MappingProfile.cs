@@ -10,6 +10,8 @@ using Mover.DTO.User;
 using Mover.Entities.POCOEntities.Vehiculos;
 using Mover.DTO.Vehiculos;
 using Mover.DTO.Ubicaciones;
+using Mover.DTO.EstadoOferta;
+using Mover.DTO.ZonaTransporter;
 
 namespace Mover.Repositories.EFCore.Mapperconfig
 {
@@ -27,6 +29,9 @@ namespace Mover.Repositories.EFCore.Mapperconfig
             CreateMap<Marca, MarcaDTO>().ReverseMap();
             CreateMap<CondicionVehiculo, CondicionVehiculoDTO>().ReverseMap();
             CreateMap<EstadoVehiculo, EstadoVehiculoDTO>().ReverseMap();
+            CreateMap<EstadoOferta, EstadoOfertaDTO>().ReverseMap();
+            CreateMap<ZonaTransporter, ZonaTransporterDTO>().ReverseMap();
+            CreateMap<ParametrosVehiculo, ParametrosVehiculoDTO>().ReverseMap();
             CreateMap<Referencia, ReferenciaDTO>().ReverseMap();
             CreateMap<Modelo, ModeloDTO>().ReverseMap();
             CreateMap<Titulos, TitulosDTO>().ReverseMap();

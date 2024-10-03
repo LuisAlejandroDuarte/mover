@@ -97,6 +97,27 @@ final GoRouter router = GoRouter(
     ),
 
     GoRoute(
+      path: '/parametrosvehiculo',
+      builder: (context, state) {
+        return const ParametrosVehiculoScreen();
+      },
+    ),
+
+    GoRoute(
+      path: '/addvehiclephoto',
+      builder: (context, state) {
+        return const AddVehiclePhotoScreen();
+      },
+    ),
+
+    GoRoute(
+      path: '/zonatransporter',
+      builder: (context, state) {
+        return const ZonaTransporterScreen();
+      },
+    ),
+
+    GoRoute(
       path: '/addOferta',
       builder: (context, state) => const AddOfertScreen(),
     ),

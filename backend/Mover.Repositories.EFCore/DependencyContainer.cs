@@ -82,6 +82,12 @@ using Mover.Entities.Interfaces.CondicionVehiculo;
 using Mover.Entities.Interfaces.EstadoVehiculo;
 using Mover.Repositories.EFCore.CondicionesVehiculo;
 using Mover.Repositories.EFCore.EstadosVehiculo;
+using Mover.Entities.Interfaces.EstadoOferta;
+using Mover.Repositories.EFCore.Repositories.EstadoOferta;
+using Mover.Entities.Interfaces.ZonaTransporter;
+using Mover.Repositories.EFCore.Repositories.ZonaTransporter;
+using Mover.Entities.Interfaces.ParametrosVehiculo.Get;
+using Mover.Repositories.EFCore.Repositories.ParametrosVehiculo;
 
 namespace Mover.Repositories.EFCore
 {
@@ -120,6 +126,15 @@ namespace Mover.Repositories.EFCore
 
             //Referencia
             services.AddScoped<IGetReferenciaByIdMarcaRepository, GetReferenciaByIdMarcaRepository>();
+
+            //EstadiOferta
+            services.AddScoped<IGetAllEstadoOfertaRepository, GetAllEstadoOfertaRepository>();
+
+            //ZonaTransporter
+            services.AddScoped<IGetAllZonaTransporterRepository, GetAllZonaTransporterRepository>();
+
+            //ParametrosVehiculo
+            services.AddScoped<IGetAllParametrosVehiculoRepository, GetAllParametrosVehiculoRepository>();
 
             //TIPO_IDENTIFIFACION
             services.AddScoped<IListarTipoIdentificacionRepository, ListarTipoIdentificacionRepository>();

@@ -9,3 +9,6 @@ export 'referencia_repositorie_impl.dart';
 export 'modelo_repositorie_impl.dart';
 export 'estado_vehiculo_repositorie_impl.dart';
 export 'condicion_vehiculo_repositorie_impl.dart';
+export 'zona_transporter_repositorie_impl.dart';
+export 'parametros_vehiculo_repositorie_impl.dart';
+export 'estado_oferta_repositorie_impl.dart';

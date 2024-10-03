@@ -15,6 +15,7 @@ using Mover.Presenter.Equipo.Crear;
 using Mover.Presenter.Equipo.Editar;
 using Mover.Presenter.Equipo.Eliminar;
 using Mover.Presenter.Equipo.ListByUser;
+using Mover.Presenter.EstadoOferta;
 using Mover.Presenter.EstadoVehiculo;
 using Mover.Presenter.Login;
 using Mover.Presenter.Marca.Get.ByIdClase;
@@ -26,6 +27,7 @@ using Mover.Presenter.Oferta.Crear;
 using Mover.Presenter.Oferta.Editar;
 using Mover.Presenter.Oferta.Eliminar;
 using Mover.Presenter.Oferta.ListaByUser;
+using Mover.Presenter.ParametrosVehiculo;
 using Mover.Presenter.Referencia.Get.ByIdMarca;
 using Mover.Presenter.TipoIdentificacion.Listar;
 using Mover.Presenter.Ubicacion.Crear;
@@ -36,6 +38,7 @@ using Mover.Presenter.Vehiculo.Crear;
 using Mover.Presenter.Vehiculo.Editar;
 using Mover.Presenter.Vehiculo.Eliminar;
 using Mover.Presenter.Vehiculo.ListByOferta;
+using Mover.Presenter.ZonaTransporter;
 using Mover.UseCasesPorts.Carroceria.Get.ByIdClase;
 using Mover.UseCasesPorts.Categoria.Get.All;
 using Mover.UseCasesPorts.Clase.Get.ByIdCategoria;
@@ -51,6 +54,7 @@ using Mover.UseCasesPorts.Equipo.Crear;
 using Mover.UseCasesPorts.Equipo.Editar;
 using Mover.UseCasesPorts.Equipo.Eliminar;
 using Mover.UseCasesPorts.Equipo.ListaByUser;
+using Mover.UseCasesPorts.EstadoOferta;
 using Mover.UseCasesPorts.EstadoVehiculo;
 using Mover.UseCasesPorts.Login;
 using Mover.UseCasesPorts.Marca.Get.ByIdClase;
@@ -62,6 +66,7 @@ using Mover.UseCasesPorts.Oferta.Crear;
 using Mover.UseCasesPorts.Oferta.Editar;
 using Mover.UseCasesPorts.Oferta.Eliminar;
 using Mover.UseCasesPorts.Oferta.ListaByUser;
+using Mover.UseCasesPorts.ParametrosVehiculo;
 using Mover.UseCasesPorts.Referencia.Get.ByIdMarca;
 using Mover.UseCasesPorts.TipoIdentificacion.Listar;
 using Mover.UseCasesPorts.Ubicacion.Crear;
@@ -72,6 +77,7 @@ using Mover.UseCasesPorts.Vehiculo.Crear;
 using Mover.UseCasesPorts.Vehiculo.Editar;
 using Mover.UseCasesPorts.Vehiculo.Eliminar;
 using Mover.UseCasesPorts.Vehiculo.ListByOferta;
+using Mover.UseCasesPorts.ZonaTransporter;
 
 
 
@@ -115,6 +121,15 @@ namespace Mover.Presenter
 
             //EstadoVehiculo
             services.AddScoped<IGetAllEstadoVehiculoOutPutPort, GetAllEstadoVehiculoPresenter>();
+
+            //EstadiOferta
+            services.AddScoped<IGetAllEstadoOfertaOutPutPort, GetAllEstadoOfertaPresenter>();
+
+            //ZonaTransporter
+            services.AddScoped<IGetAllZonaTransporterOutPutPort, GetAllZonaTransporterPresenter>();
+
+            //ParametrosVehiculo
+            services.AddScoped<IGetAllParametrosVehiculoOutPutPort, GetAllParametrosVehiculoPresenter>();
 
             //Referencia
             services.AddScoped<IGetReferenciaByIdMarcaOutPutPort, GetReferenciaByIdMarcaPresenter>();

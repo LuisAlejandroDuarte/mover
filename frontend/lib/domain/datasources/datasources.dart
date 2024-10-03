@@ -9,3 +9,6 @@ export 'referencia_datasource.dart';
 export 'modelo_datasource.dart';
 export 'condicion_vehiculo_datasource.dart';
 export 'estado_vehiculo_datasource.dart';
+export 'estado_oferta_datasource.dart';
+export 'parametros_vehiculo_datasource.dart';
+export 'zona_transporter_datasource.dart';

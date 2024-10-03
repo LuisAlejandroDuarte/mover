@@ -50,6 +50,7 @@ dependencies:
   google_maps_flutter: ^2.2.0
   flutter_google_places_sdk: ^0.3.9
   geolocator: ^9.0.2
+  image_picker: ^0.8.7+4
 
 dev_dependencies:
   flutter_lints: ^3.0.0

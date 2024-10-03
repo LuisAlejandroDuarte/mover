@@ -36,7 +36,7 @@ class ListOfertas extends StatelessWidget {
               await ofertaStorage.save(Oferta());
 
               // ignore: use_build_context_synchronously
-              context.push('/categorias');
+              context.push('/zonatransporter');
             },
             label: Text(
               'Crear oferta',

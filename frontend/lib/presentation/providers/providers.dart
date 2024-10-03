@@ -11,3 +11,6 @@ export 'referencia/referencia_provider.dart';
 export 'modelo/modelo_provider.dart';
 export 'estadovehiculo/estado_vehiculo_provider.dart';
 export 'condicionvehiculo/condicion_vehiculo_provider.dart';
+export 'estadooferta/estado_oferta_repositorie_provider.dart';
+export 'zonatransporter/zona_transporter_repositorie_provider.dart';
+export 'parametrosvehiculo/parametros_vehiculo_repositorie_provider.dart';

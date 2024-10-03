@@ -17,3 +17,6 @@ export 'Client/modelo_screen.dart';
 export 'Client/placa_screen.dart';
 export 'Client/estado_vehiculo_screen.dart';
 export 'Client/condicion_vehiculo_screen.dart';
+export 'Client/zona_transporter_screen.dart';
+export 'Client/parametros_vehiculo_screen.dart';
+export 'Client/add_vehicle_photo_screen.dart';
