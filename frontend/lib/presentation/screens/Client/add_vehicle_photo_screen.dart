@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:go_router/go_router.dart';
 
 class AddVehiclePhotoScreen extends StatefulWidget {
   const AddVehiclePhotoScreen({super.key});
@@ -158,7 +159,7 @@ class AddVehiclePhotoScreenState extends State<AddVehiclePhotoScreen> {
               onPressed: () {
                 // Aquí puedes agregar la lógica para cuando se presione "Aceptar".
                 // Por ejemplo, enviar las imágenes seleccionadas a otra pantalla o guardarlas.
-                Navigator.pop(context, _images); // Esto es solo un ejemplo.
+                context.push('/ubicacionorigen'); // Esto es solo un ejemplo.
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(

@@ -1,5 +1,6 @@
 ﻿
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mover.DTO.Vehiculos;
 using Mover.Presenter;
@@ -23,6 +24,7 @@ namespace Mover.Controllers.ParametrosVehiculo
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<List<ParametrosVehiculoDTO>> GetAllParametrosVehiculo()
         {
             await getAllParametrosVehiculoInPutPort.Handle();

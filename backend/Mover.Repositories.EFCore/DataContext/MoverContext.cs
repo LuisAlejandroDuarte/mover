@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using Mover.Entities.ConfigureEntities;
 using Mover.Entities.POCOEntities;
+using Mover.Entities.POCOEntities.Georeferencia;
 using Mover.Entities.POCOEntities.Vehiculos;
 
 namespace Mover.Repositories.EFCore.DataContext
@@ -12,7 +14,15 @@ namespace Mover.Repositories.EFCore.DataContext
 
 
         public DbSet<EstadoUsuario> EstadoUsuario { get; set; }
-        
+
+
+        #region Geoferencia
+
+        public DbSet<Pais> Pais { get; set; }
+        public DbSet<Departamento> Departamento { get; set; }
+        public DbSet<Ciudad> Ciudad { get; set; }
+
+        #endregion
 
         #region Vehiculos
 

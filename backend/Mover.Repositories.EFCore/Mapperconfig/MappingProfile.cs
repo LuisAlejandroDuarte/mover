@@ -12,6 +12,8 @@ using Mover.DTO.Vehiculos;
 using Mover.DTO.Ubicaciones;
 using Mover.DTO.EstadoOferta;
 using Mover.DTO.ZonaTransporter;
+using Mover.Entities.POCOEntities.Georeferencia;
+using Mover.DTO.Georeferencia;
 
 namespace Mover.Repositories.EFCore.Mapperconfig
 {
@@ -19,6 +21,22 @@ namespace Mover.Repositories.EFCore.Mapperconfig
     {
         public MappingProfile()
         {
+            #region Georefencia
+            #region Pais
+            CreateMap<Pais, PaisDTO>().ReverseMap();
+            #endregion
+
+            #region Departamento
+            CreateMap<Departamento, DepartamentoDTO>().ReverseMap();
+            #endregion
+
+            #region Ciudad
+            CreateMap<Ciudad, CiudadDTO>().ReverseMap();
+            #endregion
+
+            #endregion
+
+
             CreateMap<Oferta, OfertaDTO>().ReverseMap();
             CreateMap<Ubicacion, UbicacionDTO>().ReverseMap();
             CreateMap<User, UserDTO>().ReverseMap();

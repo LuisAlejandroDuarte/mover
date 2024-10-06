@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mover.Repositories.EFCore.DataContext;
 
@@ -11,9 +12,11 @@ using Mover.Repositories.EFCore.DataContext;
 namespace Mover.Repositories.EFCore.Migrations
 {
     [DbContext(typeof(MoverContext))]
-    partial class MoverContextModelSnapshot : ModelSnapshot
+    [Migration("20241005002144_Georeferencia")]
+    partial class Georeferencia
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

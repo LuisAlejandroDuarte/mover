@@ -79,15 +79,18 @@ using Mover.UseCasesPorts.CondicionVehiculo;
 using Mover.UseCases.CondicionVehiculo;
 using Mover.UseCasesPorts.EstadoVehiculo;
 using Mover.UseCases.EstadoVehiculo;
-using Mover.Entities.Interfaces.EstadoOferta;
-using Mover.Entities.Interfaces.ParametrosVehiculo.Get;
-using Mover.Entities.Interfaces.ZonaTransporter;
 using Mover.UseCasesPorts.EstadoOferta;
 using Mover.UseCases.EstadoOferta;
 using Mover.UseCases.ParametrosVehiculo;
 using Mover.UseCases.ZonaTransporter;
 using Mover.UseCasesPorts.ZonaTransporter;
 using Mover.UseCasesPorts.ParametrosVehiculo;
+using Mover.UseCasesPorts.Georeferencia.Pais.Get.ByCodigo;
+using Mover.UseCases.Georeferencia.Pais.Get.ByCodigo;
+using Mover.UseCasesPorts.Georeferencia.Departamento.Get.ByIdPais;
+using Mover.UseCases.Georeferencia.Departamento.Get.ByIdPais;
+using Mover.UseCasesPorts.Georeferencia.Ciudad.Get.ByIdDepartamento;
+using Mover.UseCases.Georeferencia.Ciudad.Get.ByIdDepartamento;
 
 
 namespace Mover.UseCases
@@ -98,6 +101,21 @@ namespace Mover.UseCases
         {
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             services.AddTransient<ILoginInPutPort, LoginInteractor>();
+
+            #region Georeferencia
+
+            #region Pais
+                services.AddTransient<IGetPaisByCodigoInPutPort, GetPaisByCodigoInteractor>();
+            #endregion
+            #region Departamento
+                services.AddTransient<IGetDepartamentoByIdPaisInPutPort, GetDepartamentoByIdPaisInteractor>();
+            #endregion
+            #region Ciudad
+                services.AddTransient<IGetCiudadByIdDepartamentoInPutPort, GetCiudadByIdDepartamentoInteractor>();
+            #endregion
+
+            #endregion
+
 
             //USer
             services.AddTransient<IGetUserByIdInPutPort, GetUserByIdInteractor>();
@@ -139,7 +157,7 @@ namespace Mover.UseCases
 
 
 
-            //EstadiOferta
+            //EstadoOferta
             services.AddScoped<IGetAllEstadoOfertaInPutPort, GetAllEstadoOfertaInteractor>();
 
             //ZonaTransporter

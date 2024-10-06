@@ -77,7 +77,6 @@ using Mover.Repositories.EFCore.Repositories.Marca.Get.ByIdClase;
 using Mover.Entities.Interfaces.Referencia.Get.ByIdMarca;
 using Mover.Repositories.EFCore.Repositories.Referencia.Get.ByIdMarca;
 using Mover.Entities.Interfaces.Modelo.Gett.All;
-using Mover.Repositories.EFCore.Modelos.Get.All;
 using Mover.Entities.Interfaces.CondicionVehiculo;
 using Mover.Entities.Interfaces.EstadoVehiculo;
 using Mover.Repositories.EFCore.CondicionesVehiculo;
@@ -88,6 +87,13 @@ using Mover.Entities.Interfaces.ZonaTransporter;
 using Mover.Repositories.EFCore.Repositories.ZonaTransporter;
 using Mover.Entities.Interfaces.ParametrosVehiculo.Get;
 using Mover.Repositories.EFCore.Repositories.ParametrosVehiculo;
+using Mover.Repositories.EFCore.Repositories.Modelos.Get.All;
+using Mover.Entities.Interfaces.Georeferencia.Pais.Get.ByCodigo;
+using Mover.Repositories.EFCore.Repositories.Georeferencia.Pais.Get.ByCodigo;
+using Mover.Entities.Interfaces.Georeferencia.Departamento.Get.ByIdPais;
+using Mover.Repositories.EFCore.Repositories.Georeferencia.Departamento.Get.ByIdPais;
+using Mover.Entities.Interfaces.Georeferencia.Ciudad.Get.ByIdDepartamento;
+using Mover.Repositories.EFCore.Repositories.Georeferencia.Ciudad.Get.ByIdDepartamento;
 
 namespace Mover.Repositories.EFCore
 {
@@ -99,6 +105,22 @@ namespace Mover.Repositories.EFCore
                 options.UseSqlServer(configuration.GetConnectionString("ConectionString")));            
             services.AddScoped<ILoginRepository, LoginRepository>();
 
+
+
+            #region GeoReferencia
+            #region Pais
+                services.AddScoped<IGetPaisByCodigoRepository, GetPaisByCodigoRepository>();
+            #endregion
+
+            #region Departamento
+                services.AddScoped<IGetDepartamentoByIdPaisRepository, GetDepartamentoByIdPaisRepository>();
+            #endregion
+
+            #region Ciudad
+                services.AddScoped<IGetCiudadByIdDepartamentoRepository, GetCiudadByIdDepartamentoRepository>();
+            #endregion
+
+            #endregion
 
             //User
             services.AddScoped<ICreearUserRepository, CrearUserRepository>();

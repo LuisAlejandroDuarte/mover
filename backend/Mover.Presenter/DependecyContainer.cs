@@ -17,6 +17,9 @@ using Mover.Presenter.Equipo.Eliminar;
 using Mover.Presenter.Equipo.ListByUser;
 using Mover.Presenter.EstadoOferta;
 using Mover.Presenter.EstadoVehiculo;
+using Mover.Presenter.Georeferencia.Ciudad.Get.ByIDepartamento;
+using Mover.Presenter.Georeferencia.Departamento.Get.ByIdPais;
+using Mover.Presenter.Georeferencia.Pais.Get.ByCoidgo;
 using Mover.Presenter.Login;
 using Mover.Presenter.Marca.Get.ByIdClase;
 using Mover.Presenter.Modelo.Get.All;
@@ -56,6 +59,9 @@ using Mover.UseCasesPorts.Equipo.Eliminar;
 using Mover.UseCasesPorts.Equipo.ListaByUser;
 using Mover.UseCasesPorts.EstadoOferta;
 using Mover.UseCasesPorts.EstadoVehiculo;
+using Mover.UseCasesPorts.Georeferencia.Ciudad.Get.ByIdDepartamento;
+using Mover.UseCasesPorts.Georeferencia.Departamento.Get.ByIdPais;
+using Mover.UseCasesPorts.Georeferencia.Pais.Get.ByCodigo;
 using Mover.UseCasesPorts.Login;
 using Mover.UseCasesPorts.Marca.Get.ByIdClase;
 using Mover.UseCasesPorts.Modelo.Get.All;
@@ -88,6 +94,22 @@ namespace Mover.Presenter
         public static IServiceCollection AddPresenters(this IServiceCollection services)
         {
             services.AddScoped<ILoginOutPutPort, LoginPresenter>();
+
+            #region Georeferencia
+            #region Pais
+                services.AddScoped<IGetPaisByCodigoOutPutPort, GetPaisByCodigoPresenter>();
+            #endregion
+
+            #region Departamento
+                services.AddScoped<IGetDepartamentoByIdPaisOutPutPort, GetDepartamentoByIdPaisPresenter>();
+            #endregion
+
+            #region Ciudad
+                services.AddScoped<IGetCiudadByIdDepartamentoOutPutPort, GetCiudadByIdDepartamentoPresenter>();
+            #endregion
+
+            #endregion
+
 
             //User
             services.AddScoped<IUserCrearOutPutPort, UserCrearPresenter>();

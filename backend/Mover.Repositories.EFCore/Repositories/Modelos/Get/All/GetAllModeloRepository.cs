@@ -4,9 +4,9 @@ using Mover.DTO.Vehiculos;
 using Mover.Entities.Interfaces.Modelo.Gett.All;
 using Mover.Repositories.EFCore.DataContext;
 
-namespace Mover.Repositories.EFCore.Modelos.Get.All
+namespace Mover.Repositories.EFCore.Repositories.Modelos.Get.All
 {
-    public class GetAllModeloRepository:IGetAllModeloRepository
+    public class GetAllModeloRepository : IGetAllModeloRepository
     {
         readonly MoverContext moverContext;
         readonly IMapper mapper;
@@ -21,7 +21,7 @@ namespace Mover.Repositories.EFCore.Modelos.Get.All
         {
             var listaModelos = await moverContext.Modelo.ToListAsync();
 
-            return mapper.Map<List<ModeloDTO>>(listaModelos.OrderByDescending(x=>x.Id));
+            return mapper.Map<List<ModeloDTO>>(listaModelos.OrderByDescending(x => x.Id));
         }
     }
 }
