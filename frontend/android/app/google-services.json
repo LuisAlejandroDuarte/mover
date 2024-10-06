@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "431487964432",
+    "project_id": "tokenmovil-1205c",
+    "storage_bucket": "tokenmovil-1205c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431487964432:android:fcf7579c28a22d756c4195",
+        "android_client_info": {
+          "package_name": "com.mover.transporte"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtzJpnTrR0m5lO0IzNZUHGsXtL4lW6U5c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
