@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../domain/domain.dart';
 import '../../../utils/storage/dispositivo_storage.dart';
 import '../../../utils/error_handler.dart';
-import '../../../utils/storage/token_storage.dart';
+//import '../../../utils/storage/token_storage.dart';
 import '../../providers/providers.dart';
 import '../../Widget/widgets.dart';
 
@@ -208,31 +208,31 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
                       isLoading = true;
                     });
 
-                    final user = User(
-                      nombre: nombres.value,
-                      apellido: apellidos.value,
-                      identificacion: identificacion.value,
-                      direccion: direccion.value,
-                      telefono: telefono.value,
-                      email: email.value,
-                      userName: username.value,
-                      tipoIdentificacionId:
-                          registerCubit.state.tipoIdentificacion.value!,
-                      estadoUsuarioId: 1,
-                      ultimaSesion: DateTime.now(),
-                      password: registerCubit.state.repassword.value,
-                    );
+                    // final user = User(
+                    //   // nombre: nombres.value,
+                    //   // apellido: apellidos.value,
+                    //   // identificacion: identificacion.value,
+                    //   // direccion: direccion.value,
+                    //   // telefono: telefono.value,
+                    //   // email: email.value,
+                    //   // userName: username.value,
+                    //   // tipoIdentificacionId:
+                    //   //     registerCubit.state.tipoIdentificacion.value!,
+                    //   estadoUsuarioId: 1,
+                    //   ultimaSesion: DateTime.now(),
+                    //   password: registerCubit.state.repassword.value,
+                    // );
 
-                    final userRepository = ref.watch(userRepositoryProvider);
+                    //   final userRepository = ref.watch(userRepositoryProvider);
                     final dispositivosRepository =
                         ref.watch(dispositivoRepositoryProvider);
 
                     try {
-                      final newUser = await userRepository.addUser(user);
+                      // final newUser = await userRepository.addUser(user);
 
-                      final TokenStorage tokenStorage = TokenStorage();
-                      await tokenStorage.deleteToken();
-                      await tokenStorage.saveToken(newUser.token);
+                      // final TokenStorage tokenStorage = TokenStorage();
+                      // await tokenStorage.deleteToken();
+                      // await tokenStorage.saveToken(newUser.token);
 
                       try {
                         DispositivoStorage tokenStorage = DispositivoStorage();
@@ -246,7 +246,7 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
                           uniqueDeviceId: tokenNotification.uniqueDeviceId,
                           ultimaConexion: DateTime.now(),
                           activo: true,
-                          userId: newUser.id,
+                          // userId: newUser.id,
                         );
 
                         await dispositivosRepository

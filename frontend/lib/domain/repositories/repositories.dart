@@ -12,3 +12,7 @@ export 'estado_vehiculo_repositorie.dart';
 export 'parametros_vehiculo_repositorie.dart';
 export 'estado_oferta_repositorie.dart';
 export 'zona_transporter_repositorie.dart';
+export 'ubicacion_repositorie.dart';
+export 'georeferencia/ciudad_repositorie.dart';
+export 'georeferencia/departamento_repositorie.dart';
+export 'georeferencia/pais_repositorie.dart';

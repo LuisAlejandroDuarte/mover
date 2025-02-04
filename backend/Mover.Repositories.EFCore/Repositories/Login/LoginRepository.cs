@@ -24,7 +24,7 @@ namespace Mover.Repositories.EFCore.Repositories.Login
 
         public UserDTO Login(LoginDTO login)
         {
-            var users = Context.Users?.FirstOrDefault(u => u.Email == login.Email);
+            var users = Context.Users?.FirstOrDefault();
             
             if (users == null)
             {
@@ -40,13 +40,9 @@ namespace Mover.Repositories.EFCore.Repositories.Login
             return new UserDTO()
             {
                 Id = users.Id,
-                UserName = users.UserName,
-                Identificacion = users.Identificacion,
-                Nombre = users.Nombre,
-                Apellido = users.Apellido,
-                Direccion = users.Direccion,
-                Telefono = users.Telefono,               
-                UltimaSesion = users.UltimaSesion                
+                UserName = users.UserName,                
+                UltimaSesion = users.UltimaSesion
+                
             };
 
         }

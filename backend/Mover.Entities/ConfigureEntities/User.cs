@@ -9,24 +9,7 @@ namespace Mover.Entities.ConfigureEntities
 
         public void Configure(EntityTypeBuilder<User> modelBuilder)
         {
-            modelBuilder.Property(x => x.Nombre)
-                .IsRequired()
-                .HasMaxLength(100);
-            modelBuilder.Property(x => x.Apellido)
-                .IsRequired()
-                .HasMaxLength(100);
-            modelBuilder
-                .Property(x => x.Direccion)
-                .IsRequired()
-                .HasMaxLength(200);
-            modelBuilder
-                .Property(x => x.Telefono)
-                .IsRequired()
-                .HasMaxLength(50);
-            modelBuilder
-                .Property(x => x.Email)
-                .IsRequired()
-                .HasMaxLength(100);
+
             modelBuilder
                .Property(x => x.UserName)
                .IsRequired()
@@ -39,17 +22,13 @@ namespace Mover.Entities.ConfigureEntities
                 .Property(x => x.UltimaSesion)
                 .IsRequired(false);             
 
-            modelBuilder
-              .Property(x => x.Identificacion)
-              .HasMaxLength(50);
-
             modelBuilder.HasMany(u => u.ListEquipos)
                 .WithOne(e => e.User)
                 .HasForeignKey(e => e.UserId);
 
             modelBuilder.HasMany(u => u.ListConductorAutorizado)
                 .WithOne(e => e.User)
-                .HasForeignKey(e => e.UserId);
+                .HasForeignKey(e => e.UserId);            
         }
     }
 }

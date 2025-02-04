@@ -1,4 +1,5 @@
 export 'dispositivo_storage.dart';
+export 'user_storage.dart';
 export 'oferta_storage.dart';
 export 'storage_impl.dart';
 export 'storage.dart';
@@ -6,3 +7,7 @@ export 'token_storage.dart';
 export 'ubicacion_destino_storage.dart';
 export 'ubicacion_origen_storage.dart';
 export 'vehiculo_storage.dart';
+export 'vehiculo_list_storage.dart';
+export 'multimedia_vehiculo_list_storage.dart';
+export 'empresa_storage.dart';
+export 'persona_natural_storage.dart';

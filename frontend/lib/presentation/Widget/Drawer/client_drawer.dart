@@ -18,9 +18,12 @@ class ClientDrawer extends StatelessWidget {
               backgroundImage: NetworkImage('https://via.placeholder.com/150'),
             ),
           ),
-          const ListTile(
-            leading: Icon(Icons.add),
-            title: Text('Ofertas'),
+          ListTile(
+            leading: const Icon(Icons.add),
+            title: Text(
+              'Ofertas',
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
             // onTap: () {
             //   onSelect(const ListOfertas(), "Ofertas");
             // },

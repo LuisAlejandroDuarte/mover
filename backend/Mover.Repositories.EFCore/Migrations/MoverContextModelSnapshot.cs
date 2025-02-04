@@ -42,7 +42,7 @@ namespace Mover.Repositories.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Estado")
+                    b.Property<int>("EstadoConductorAutorizadoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Identificacion")
@@ -57,6 +57,8 @@ namespace Mover.Repositories.EFCore.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EstadoConductorAutorizadoId");
 
                     b.HasIndex("UserId");
 
@@ -102,6 +104,51 @@ namespace Mover.Repositories.EFCore.Migrations
                     b.ToTable("Dispositivos");
                 });
 
+            modelBuilder.Entity("Mover.Entities.POCOEntities.Empresa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NIT")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RazonSocial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RepresentanteLegal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NIT")
+                        .IsUnique()
+                        .HasFilter("[NIT] IS NOT NULL");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("Empresa");
+                });
+
             modelBuilder.Entity("Mover.Entities.POCOEntities.Equipo", b =>
                 {
                     b.Property<int>("Id")
@@ -110,22 +157,14 @@ namespace Mover.Repositories.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Estado")
+                    b.Property<int>("CarroceriaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdColor")
-                        .HasColumnType("int");
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdLinea")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdMarca")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdModelo")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdTipoCarroceria")
+                    b.Property<int?>("EstadoEquipoId")
                         .HasColumnType("int");
 
                     b.Property<string>("LinkLicenciaConduccion")
@@ -140,6 +179,12 @@ namespace Mover.Repositories.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("MarcaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ModeloId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PlacasSemirremolque")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -148,14 +193,60 @@ namespace Mover.Repositories.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ReferenciaId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CarroceriaId");
+
+                    b.HasIndex("EstadoEquipoId");
+
+                    b.HasIndex("MarcaId");
+
+                    b.HasIndex("ModeloId");
+
+                    b.HasIndex("ReferenciaId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Equipo");
+                });
+
+            modelBuilder.Entity("Mover.Entities.POCOEntities.EstadoConductorAutorizado", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EstadoConductorAutorizado");
+                });
+
+            modelBuilder.Entity("Mover.Entities.POCOEntities.EstadoEquipo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EstadoEquipo");
                 });
 
             modelBuilder.Entity("Mover.Entities.POCOEntities.EstadoOferta", b =>
@@ -316,6 +407,9 @@ namespace Mover.Repositories.EFCore.Migrations
                     b.Property<decimal?>("Precio")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("TipoNaturaleza")
+                        .HasColumnType("int");
+
                     b.Property<int>("UbicacionDestinoId")
                         .HasColumnType("int");
 
@@ -341,6 +435,57 @@ namespace Mover.Repositories.EFCore.Migrations
                     b.HasIndex("ZonaTransporterId");
 
                     b.ToTable("Oferta");
+                });
+
+            modelBuilder.Entity("Mover.Entities.POCOEntities.PersonaNatural", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Identificacion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TipoIdentificacionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Identificacion")
+                        .IsUnique();
+
+                    b.HasIndex("TipoIdentificacionId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("PersonaNatural");
                 });
 
             modelBuilder.Entity("Mover.Entities.POCOEntities.TipoIdentificacion", b =>
@@ -413,18 +558,17 @@ namespace Mover.Repositories.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CiudadId")
+                    b.Property<int?>("CiudadId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DepartamentoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Direccion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DispositivoId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DispositivosId")
+                    b.Property<int?>("DispositivoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("FechaHora")
@@ -445,7 +589,9 @@ namespace Mover.Repositories.EFCore.Migrations
 
                     b.HasIndex("CiudadId");
 
-                    b.HasIndex("DispositivosId");
+                    b.HasIndex("DepartamentoId");
+
+                    b.HasIndex("DispositivoId");
 
                     b.ToTable("Ubicacion");
                 });
@@ -458,44 +604,14 @@ namespace Mover.Repositories.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Apellido")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Direccion")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<int?>("EstadoUsuarioId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Identificacion")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int?>("TipoIdentificacionId")
+                    b.Property<int?>("TipoNaturaleza")
                         .HasColumnType("int");
 
                     b.Property<int?>("TipoUserId")
@@ -512,8 +628,6 @@ namespace Mover.Repositories.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EstadoUsuarioId");
-
-                    b.HasIndex("TipoIdentificacionId");
 
                     b.HasIndex("TipoUserId");
 
@@ -812,11 +926,19 @@ namespace Mover.Repositories.EFCore.Migrations
 
             modelBuilder.Entity("Mover.Entities.POCOEntities.ConductorAutorizado", b =>
                 {
+                    b.HasOne("Mover.Entities.POCOEntities.EstadoConductorAutorizado", "EstadoConductorAutorizado")
+                        .WithMany("ListConductorAutorizado")
+                        .HasForeignKey("EstadoConductorAutorizadoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Mover.Entities.POCOEntities.User", "User")
                         .WithMany("ListConductorAutorizado")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("EstadoConductorAutorizado");
 
                     b.Navigation("User");
                 });
@@ -832,13 +954,61 @@ namespace Mover.Repositories.EFCore.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Mover.Entities.POCOEntities.Empresa", b =>
+                {
+                    b.HasOne("Mover.Entities.POCOEntities.User", "User")
+                        .WithOne("Empresa")
+                        .HasForeignKey("Mover.Entities.POCOEntities.Empresa", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Mover.Entities.POCOEntities.Equipo", b =>
                 {
+                    b.HasOne("Mover.Entities.POCOEntities.Vehiculos.Carroceria", "Carroceria")
+                        .WithMany()
+                        .HasForeignKey("CarroceriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Mover.Entities.POCOEntities.EstadoEquipo", "EstadoEquipo")
+                        .WithMany("ListEquipo")
+                        .HasForeignKey("EstadoEquipoId");
+
+                    b.HasOne("Mover.Entities.POCOEntities.Vehiculos.Marca", "Marca")
+                        .WithMany()
+                        .HasForeignKey("MarcaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Mover.Entities.POCOEntities.Vehiculos.Modelo", "Modelo")
+                        .WithMany()
+                        .HasForeignKey("ModeloId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Mover.Entities.POCOEntities.Vehiculos.Referencia", "Referencia")
+                        .WithMany()
+                        .HasForeignKey("ReferenciaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Mover.Entities.POCOEntities.User", "User")
                         .WithMany("ListEquipos")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Carroceria");
+
+                    b.Navigation("EstadoEquipo");
+
+                    b.Navigation("Marca");
+
+                    b.Navigation("Modelo");
+
+                    b.Navigation("Referencia");
 
                     b.Navigation("User");
                 });
@@ -917,21 +1087,42 @@ namespace Mover.Repositories.EFCore.Migrations
                     b.Navigation("ZonaTransporter");
                 });
 
+            modelBuilder.Entity("Mover.Entities.POCOEntities.PersonaNatural", b =>
+                {
+                    b.HasOne("Mover.Entities.POCOEntities.TipoIdentificacion", "TipoIdentificacion")
+                        .WithMany()
+                        .HasForeignKey("TipoIdentificacionId");
+
+                    b.HasOne("Mover.Entities.POCOEntities.User", "User")
+                        .WithOne("PersonaNatural")
+                        .HasForeignKey("Mover.Entities.POCOEntities.PersonaNatural", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TipoIdentificacion");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Mover.Entities.POCOEntities.Ubicacion", b =>
                 {
                     b.HasOne("Mover.Entities.POCOEntities.Georeferencia.Ciudad", "Ciudad")
                         .WithMany()
-                        .HasForeignKey("CiudadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CiudadId");
 
-                    b.HasOne("Mover.Entities.POCOEntities.Dispositivos", "Dispositivos")
+                    b.HasOne("Mover.Entities.POCOEntities.Georeferencia.Departamento", "Departamento")
                         .WithMany()
-                        .HasForeignKey("DispositivosId");
+                        .HasForeignKey("DepartamentoId");
+
+                    b.HasOne("Mover.Entities.POCOEntities.Dispositivos", "Dispositivo")
+                        .WithMany()
+                        .HasForeignKey("DispositivoId");
 
                     b.Navigation("Ciudad");
 
-                    b.Navigation("Dispositivos");
+                    b.Navigation("Departamento");
+
+                    b.Navigation("Dispositivo");
                 });
 
             modelBuilder.Entity("Mover.Entities.POCOEntities.User", b =>
@@ -940,17 +1131,11 @@ namespace Mover.Repositories.EFCore.Migrations
                         .WithMany()
                         .HasForeignKey("EstadoUsuarioId");
 
-                    b.HasOne("Mover.Entities.POCOEntities.TipoIdentificacion", "TipoIdentificacion")
-                        .WithMany()
-                        .HasForeignKey("TipoIdentificacionId");
-
                     b.HasOne("Mover.Entities.POCOEntities.TipoUser", "TipoUser")
                         .WithMany()
                         .HasForeignKey("TipoUserId");
 
                     b.Navigation("EstadoUsuario");
-
-                    b.Navigation("TipoIdentificacion");
 
                     b.Navigation("TipoUser");
                 });
@@ -1071,6 +1256,16 @@ namespace Mover.Repositories.EFCore.Migrations
                     b.Navigation("Referencia");
                 });
 
+            modelBuilder.Entity("Mover.Entities.POCOEntities.EstadoConductorAutorizado", b =>
+                {
+                    b.Navigation("ListConductorAutorizado");
+                });
+
+            modelBuilder.Entity("Mover.Entities.POCOEntities.EstadoEquipo", b =>
+                {
+                    b.Navigation("ListEquipo");
+                });
+
             modelBuilder.Entity("Mover.Entities.POCOEntities.Oferta", b =>
                 {
                     b.Navigation("ListVehiculo");
@@ -1078,9 +1273,13 @@ namespace Mover.Repositories.EFCore.Migrations
 
             modelBuilder.Entity("Mover.Entities.POCOEntities.User", b =>
                 {
+                    b.Navigation("Empresa");
+
                     b.Navigation("ListConductorAutorizado");
 
                     b.Navigation("ListEquipos");
+
+                    b.Navigation("PersonaNatural");
                 });
 
             modelBuilder.Entity("Mover.Entities.POCOEntities.Vehiculos.Clase", b =>

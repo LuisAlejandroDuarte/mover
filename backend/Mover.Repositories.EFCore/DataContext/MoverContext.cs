@@ -48,12 +48,18 @@ namespace Mover.Repositories.EFCore.DataContext
         public DbSet<TipoUser> TipoUser { get; set; }
         public DbSet<TipoIdentificacion> TipoIdentificacion { get; set; }
         public DbSet<User> Users { get; set; }
+
+        public DbSet<PersonaNatural> PersonaNatural { get; set; }
+        public DbSet<Empresa> Empresa { get; set; }
+
         public DbSet<Dispositivos> Dispositivos { get; set; }
         public DbSet<Oferta> Oferta { get; set; }      
         public DbSet<Equipo> Equipo { get; set; }
+        public DbSet<EstadoEquipo> EstadoEquipo { get; set; }
       
         public DbSet<Titulos> Titulos { get; set; }
         public DbSet<ConductorAutorizado> ConductorAutorizado { get; set; }
+        public DbSet<EstadoConductorAutorizado> EstadoConductorAutorizado { get; set; }
 
         //public DbSet<EquipoConductor> EquipoConductor { get; set; }
 
@@ -62,14 +68,12 @@ namespace Mover.Repositories.EFCore.DataContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            new UserEntityTypeConfiguration().Configure(modelBuilder.Entity<User>());           
-            //new OfertaEntityTypeConfiguration().Configure(modelBuilder.Entity<Oferta>());
-            //new EquipoEntityTypeConfiguration().Configure(modelBuilder.Entity<Equipo>());
-            //new TituloEntityTypeConfiguration().Configure(modelBuilder.Entity<Titulos>());
-
-            //new EquipoConductorEntityTypeConfiguration().Configure(modelBuilder.Entity<EquipoConductor>());         
+            new UserEntityTypeConfiguration().Configure(modelBuilder.Entity<User>());       
+            new PersonaNaturalEntityTypeConfiguration().Configure(modelBuilder.Entity<PersonaNatural>());
+            new EmpresaEntityTypeConfiguration().Configure(modelBuilder.Entity<Empresa>());     
 
             new ParametrosVehiculoConfiguration().Configure(modelBuilder.Entity<ParametrosVehiculoVehiculo>());
+            new EstadoEquipoEntityTypeConfiguration().Configure(modelBuilder.Entity<EstadoEquipo>());
 
             modelBuilder.Entity<ClaseMarca>()
                 .HasOne(mc => mc.Marca)
@@ -200,43 +204,34 @@ namespace Mover.Repositories.EFCore.DataContext
                 {
                     TipoIdentificacion.AddRange(
 
-                       new TipoIdentificacion { Sigla = "CC",Nombre = "Cédula de ciudadania" },
-                       new TipoIdentificacion { Sigla = "NIT", Nombre = "Número de identificación tributaria" },
-                       new TipoIdentificacion { Sigla = "TE", Nombre = "Tarjeta de extranjería" }
+                       new TipoIdentificacion { Sigla = "CC",Nombre = "Cédula de ciudadania" },                       
+                       new TipoIdentificacion { Sigla = "TE", Nombre = "Tarjeta de extranjería" },
+                       new TipoIdentificacion { Sigla = "CE", Nombre = "Cédula extranjería" },
+                       new TipoIdentificacion { Sigla = "PA", Nombre = "Pasaporte" },
+                       new TipoIdentificacion { Sigla = "TDE", Nombre = "Tipo documento extranjero" }
+                                              
                     );                    
                 }
+                
 
                 if (!Users.Any())
                 {
-                    Users.Add(new User { 
-                        Nombre = "Name Administrador",
-                        Apellido="Last Administrador",
-                        Direccion ="Direccion Admin",
-                        Email="email@admin.com",
-                        Identificacion="0000-00000",
-                        TipoIdentificacionId=1,
+                    Users.Add(new User {                       
                         TipoUserId=1,
                         EstadoUsuarioId=1,
                         Password = "21232f297a57a5a743894a0e4a801fc3",
-                        UserName="admin",
-                        Telefono="",
+                        UserName="admin",                        
                         UltimaSesion = new DateTime()
                     });
                     Users.Add(new User
-                    {
-                        Nombre = "Luis Alejandro",
-                        Apellido = "Duarte Martinez",
-                        Direccion = "Direccion",
-                        Email = "ladm4@hotmail.com",
-                        Identificacion = "0000-111111",
-                        TipoIdentificacionId = 1,
+                    {                        
                         TipoUserId = 2,
+                        TipoNaturaleza=0,
                         EstadoUsuarioId = 1,
                         Password = "9023cb1980387cc278a8be2fbc927a92",
-                        UserName = "LuisAlejo",
-                        Telefono = "",
+                        UserName = "LuisAlejo",                       
                         UltimaSesion = new DateTime()
-                    });
+                    });                   
                 }
 
                 if (!Marca.Any())

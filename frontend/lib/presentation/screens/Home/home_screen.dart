@@ -3,12 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../../domain/domain.dart';
-import '../../../utils/storage/dispositivo_storage.dart';
 import '../../../utils/error_handler.dart';
+import '../../../utils/storage/storagex.dart';
 import '../../providers/dispositivos/dispositivo_provider.dart';
 import '../screen.dart';
 
 Future<Dispositivos?> validarTokenExistToken(BuildContext context) async {
+  UserStorage userStorage = UserStorage();
   final infoDispositivo = DispositivoStorage();
   await infoDispositivo.saveDataDispositivo();
   final container = ProviderContainer();
@@ -16,6 +17,9 @@ Future<Dispositivos?> validarTokenExistToken(BuildContext context) async {
   final kDispositivo = await infoDispositivo.get();
 
   try {
+    await userStorage.delete();
+    User user = User();
+    await userStorage.save(user);
     final dispositivo = await dispositivoNotifier
         .getDispositivoByDeviceId(kDispositivo!.uniqueDeviceId);
 
@@ -37,6 +41,8 @@ Future<bool> validarExistModel(String modelo) async {
 }
 
 Future<void> saveStorageDispositivo(Dispositivos dispositivos) async {
+  // dispositivos?.copyWith()
+
   DispositivoStorage dispositivoStorage = DispositivoStorage();
   await dispositivoStorage.save(dispositivos);
 }
@@ -66,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return const Text('Error occurred');
         } else if (snapshot.data == null ||
             snapshot.data!.uniqueDeviceId.isEmpty) {
-          return const RegisterScreen();
+          return const SelectTypeUserScreen();
         } else {
           return FutureBuilder<bool>(
             future: validarExistModel(snapshot.data!.modelo),
@@ -81,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               } else if (modelSnapshot.hasError || !modelSnapshot.data!) {
                 // Si hay un error o los modelos no coinciden, redirige a RegisterScreen
-                return const RegisterScreen();
+                return const SelectTypeUserScreen();
               } else {
                 // Si los modelos coinciden, redirige a PasswordScreen
                 return PasswordScreen(userId: snapshot.data!.userId);

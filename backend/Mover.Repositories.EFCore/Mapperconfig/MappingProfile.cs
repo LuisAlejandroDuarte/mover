@@ -14,6 +14,9 @@ using Mover.DTO.EstadoOferta;
 using Mover.DTO.ZonaTransporter;
 using Mover.Entities.POCOEntities.Georeferencia;
 using Mover.DTO.Georeferencia;
+using Mover.DTO.ConductorAutorizado;
+using Mover.DTO.Empresa;
+using Mover.DTO.PersonaNatural;
 
 namespace Mover.Repositories.EFCore.Mapperconfig
 {
@@ -47,7 +50,7 @@ namespace Mover.Repositories.EFCore.Mapperconfig
             CreateMap<Marca, MarcaDTO>().ReverseMap();
             CreateMap<CondicionVehiculo, CondicionVehiculoDTO>().ReverseMap();
             CreateMap<EstadoVehiculo, EstadoVehiculoDTO>().ReverseMap();
-            CreateMap<EstadoOferta, EstadoOfertaDTO>().ReverseMap();
+            CreateMap<EstadoOferta, EstadoOfertaDTO>().ReverseMap();            
             CreateMap<ZonaTransporter, ZonaTransporterDTO>().ReverseMap();
             CreateMap<ParametrosVehiculo, ParametrosVehiculoDTO>().ReverseMap();
             CreateMap<Referencia, ReferenciaDTO>().ReverseMap();
@@ -60,7 +63,15 @@ namespace Mover.Repositories.EFCore.Mapperconfig
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
                 .ReverseMap();
             CreateMap<MultimediaVehiculo, MultimediaVehiculoDTO>().ReverseMap().ForSourceMember(x=>x.Image,y=>y.DoNotValidate());
-            
+
+            CreateMap<PersonaNatural, PersonaNaturalDTO>().ReverseMap();
+            CreateMap<Empresa, EmpresaDTO>().ReverseMap();            
+            CreateMap<ConductorAutorizado, ConductorAutorizadoDTO>().ReverseMap();
+
+            CreateMap<User, UserDTO>()
+             .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+              
+
         }
     }
 }

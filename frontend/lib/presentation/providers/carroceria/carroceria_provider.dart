@@ -4,21 +4,23 @@ import '../../../domain/domain.dart';
 import 'carroceria_repositorie_provider.dart';
 
 final carroceriaProvider =
-    StateNotifierProvider<CarroceriaNotifier, List<Carroceria>>((ref) {
+    StateNotifierProvider<CarroceriaNotifier, AsyncValue<List<Carroceria>>>(
+        (ref) {
   final carroceria = ref.watch(carroceriaRepositorieProvider);
 
   return CarroceriaNotifier(carroceriaRepositorie: carroceria);
 });
 
-class CarroceriaNotifier extends StateNotifier<List<Carroceria>> {
+class CarroceriaNotifier extends StateNotifier<AsyncValue<List<Carroceria>>> {
   final CarroceriaRepositorie carroceriaRepositorie;
 
-  CarroceriaNotifier({required this.carroceriaRepositorie}) : super([]);
+  CarroceriaNotifier({required this.carroceriaRepositorie})
+      : super(const AsyncValue.loading());
 
   Future<void> getCarroceriaByIdClase(int idClase) async {
     final carrocerias =
         await carroceriaRepositorie.getCarroceriaByIdClase(idClase);
 
-    state = carrocerias;
+    state = AsyncData(carrocerias);
   }
 }

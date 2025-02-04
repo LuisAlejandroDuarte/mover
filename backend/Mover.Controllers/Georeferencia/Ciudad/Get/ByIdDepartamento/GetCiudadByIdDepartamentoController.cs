@@ -26,11 +26,11 @@ namespace Mover.Controllers.Georeferencia.Ciudad.Get.ByIdDepartamento
 
         [HttpGet]
         [Authorize]
-        public async Task<List<DepartamentoDTO>> GetCiudadByIdDepartamento(int departamentoId)
+        public async Task<List<CiudadDTO>> GetCiudadByIdDepartamento(int departamentoId)
         {
             await getCiudadByIdDepartamentoInPutPort.Handle(departamentoId);
 
-            return ((IPresenter<List<DepartamentoDTO>>)getCiudadByIdDepartamentoOutPutPort).Content;
+            return ((IPresenter<List<CiudadDTO>>)getCiudadByIdDepartamentoOutPutPort).Content;
         }
     }
 }

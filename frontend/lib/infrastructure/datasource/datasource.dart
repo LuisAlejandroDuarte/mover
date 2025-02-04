@@ -12,3 +12,6 @@ export 'condicion_vehiculo_datasorce_impl.dart';
 export 'parametros_vehiculo_datasource_impl.dart';
 export 'estado_oferta_datasource_impl.dart';
 export 'zona_transporter_datasorce_impl.dart';
+export 'georeferencia/ciudad_datasource_impl.dart';
+export 'georeferencia/pais_datasource_impl.dart';
+export 'georeferencia/departamento_datasource_impl.dart';

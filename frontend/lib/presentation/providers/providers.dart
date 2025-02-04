@@ -14,3 +14,6 @@ export 'condicionvehiculo/condicion_vehiculo_provider.dart';
 export 'estadooferta/estado_oferta_repositorie_provider.dart';
 export 'zonatransporter/zona_transporter_repositorie_provider.dart';
 export 'parametrosvehiculo/parametros_vehiculo_repositorie_provider.dart';
+export 'georeferencia/ciudad/ciudad_repositorie_provider.dart';
+export 'georeferencia/departamento/departamento_repositorie_provider.dart';
+export 'georeferencia/pais/pais_repositorie_provider.dart';

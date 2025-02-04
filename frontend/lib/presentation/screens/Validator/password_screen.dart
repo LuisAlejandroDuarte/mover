@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/domain/entities/user.dart';
+import 'package:frontend/utils/storage/user_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bcrypt/bcrypt.dart';
 
@@ -19,6 +20,8 @@ class PasswordScreen extends StatefulWidget {
 
 class _PasswordScreenState extends State<PasswordScreen> {
   final TextEditingController _passwordController = TextEditingController();
+  UserStorage userStorage = UserStorage();
+  User? user;
   bool _obscureText = true;
   bool _isNavigating = false;
 
@@ -28,7 +31,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
     return await userNotifier.getById(id);
   }
 
-  void _validateAndNavigate(User user) {
+  void _validateAndNavigate(User user) async {
     String password = _passwordController.text;
     bool isValid = BCrypt.checkpw(password, user.password);
 
@@ -39,12 +42,12 @@ class _PasswordScreenState extends State<PasswordScreen> {
         ),
       );
     } else {
-      if (!_isNavigating) {
-        setState(() {
-          _isNavigating = true;
-        });
-        context.push('/selecttypeuser');
+      _passwordController.text = '';
+      if (user.tipoUserId == 2) {
+        context.push('/listOfertas');
       }
+      //context.push('/selecttypeuser');
+      //await userStorage.save(user);
     }
   }
 
@@ -76,7 +79,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(snapshot.data!.nombre),
+                    // Text(snapshot.data!.nombre),
                     TextField(
                       controller: _passwordController,
                       obscureText: _obscureText,

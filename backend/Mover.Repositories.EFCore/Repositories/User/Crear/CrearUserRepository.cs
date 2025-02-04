@@ -1,49 +1,35 @@
 ﻿using Mover.DTO.User;
-using Mover.Repositories.EFCore.Utils;
+
 using Mover.Entities.Interfaces.User.Crear;
 using Mover.Repositories.EFCore.DataContext;
+using AutoMapper;
+
+using Mover.DTO.PersonaNatural;
+using Mover.DTO.Empresa;
 
 namespace Mover.Repositories.EFCore.Repositories.User.Crear
 {
     public class CrearUserRepository : ICreearUserRepository
     {
         private readonly MoverContext Context;
+        private readonly IMapper imapper;
 
-        public CrearUserRepository(MoverContext context)
+        public CrearUserRepository(MoverContext context, IMapper imapper)
         {
             Context = context;
+            this.imapper = imapper;
         }
 
         public UserDTO Create(UserDTO user)
-        {            
-            var usuario  = Context.Users.FirstOrDefault(x=>x.Email == user.Email);
-            if (usuario != null)
-            {                
-                throw new Exception("emailalreadyexists");               
-            }
+        {
 
-           usuario = Context.Users.FirstOrDefault(x => x.Identificacion == user.Identificacion);
-            if (usuario != null)
-            {
-                throw new Exception("identificationalreadyexists");
-            }
+            if (user.TipoNaturaleza==1)            
+                user.Empresa = null;
 
-            Mover.Entities.POCOEntities.User newUser = new()
-            {
-                Nombre = user.Nombre,
-                Apellido = user.Apellido,
-                Email = user.Email,
-                Direccion = user.Direccion,
-                TipoUserId = user.TipoUserId,
-                UserName = user.UserName,
-                Identificacion = user.Identificacion,
-                TipoIdentificacionId = user.TipoIdentificacionId,
-                Telefono = user.Telefono,
-                UltimaSesion =user.UltimaSesion,
-                EstadoUsuarioId=1,
-                Password = PasswordHasher.HashPassword(user.Password)
-            };
+            if (user.TipoNaturaleza == 2)
+                user.PersonaNatural = null;                        
 
+            var newUser = this.imapper.Map<Mover.Entities.POCOEntities.User> (user);
 
             Context.Add(newUser);
             Context.SaveChanges();

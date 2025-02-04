@@ -52,12 +52,40 @@ class AppTheme {
               selectedColor], // Asegúrate de que el color primario sea el esperado
         ),
         textTheme: TextTheme(
-          labelLarge: textStyleList[selectedTextStyle],
-          labelMedium: textStyleList[selectedTextStyle],
-          labelSmall: textStyleList[selectedTextStyle].copyWith(fontSize: 18),
+          // Labels
+          labelLarge: textStyleList[selectedTextStyle].copyWith(
+            fontSize: 18, // Más pequeño que title
+            fontWeight: FontWeight.normal, // Peso normal para label
+            color: Colors.grey[800], // Color menos destacado
+          ),
+          labelMedium: textStyleList[selectedTextStyle].copyWith(
+            fontSize: 16, // Aún más pequeño
+            fontWeight: FontWeight.normal,
+            color: Colors.grey[600],
+          ),
+          labelSmall: textStyleList[selectedTextStyle].copyWith(
+            fontSize: 14, // El más pequeño
+            fontWeight: FontWeight.w300, // Peso más ligero para menor énfasis
+            color: Colors.grey[500],
+          ),
+
+          // Titles
           titleLarge: textStyleList[selectedTextStyle].copyWith(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-          titleMedium: textStyleList[selectedTextStyle].copyWith(fontSize: 22),
+            fontSize: 24, // Más grande que los labels
+            fontWeight: FontWeight.bold, // Peso más fuerte para destacar
+            color: Colors.black, // Color fuerte
+          ),
+          titleMedium: textStyleList[selectedTextStyle].copyWith(
+            fontSize: 20, // Tamaño intermedio
+            fontWeight: FontWeight.w600, // Peso medio-alto
+            color: Colors.black87, // Un tono menos fuerte que titleLarge
+          ),
+          titleSmall: textStyleList[selectedTextStyle].copyWith(
+            fontSize: 18, // Aún más pequeño pero más grande que los labels
+            fontWeight: FontWeight.w500, // Peso medio
+            color: Colors.black54, // Tono grisáceo
+          ),
+
           // Customize other text styles if needed
         ),
         appBarTheme: const AppBarTheme(centerTitle: true),

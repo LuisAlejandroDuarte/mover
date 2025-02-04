@@ -12,3 +12,7 @@ export 'estado_vehiculo_datasource.dart';
 export 'estado_oferta_datasource.dart';
 export 'parametros_vehiculo_datasource.dart';
 export 'zona_transporter_datasource.dart';
+export 'ubicacion_datasource.dart';
+export 'georeferencia/ciudad_datasource.dart';
+export 'georeferencia/departamento_datasource.dart';
+export 'georeferencia/pais_datasource.dart';

@@ -1,4 +1,5 @@
 ﻿
+using Mover.Entities.Enums;
 using Mover.Entities.POCOEntities.Vehiculos;
 
 namespace Mover.Entities.POCOEntities
@@ -12,6 +13,7 @@ namespace Mover.Entities.POCOEntities
         public decimal? Precio { get; set; } = decimal.Zero;
 
         public int UserId  { get; set; }        
+        public TipoNaturaleza? TipoNaturaleza { get; set; }
         public int UbicacionOrigenId { get; set; }
         public int UbicacionDestinoId { get; set; }
         public int ZonaTransporterId { get; set; }

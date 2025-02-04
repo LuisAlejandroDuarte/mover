@@ -1,4 +1,7 @@
-﻿namespace Mover.DTO.Oferta
+﻿
+using Mover.DTO.Vehiculos;
+
+namespace Mover.DTO.Oferta
 {
     public class OfertaDTO
     {
@@ -8,10 +11,13 @@
         public string Observaciones { get; set; } = string.Empty;
         public decimal? Precio { get; set; } = decimal.Zero;
 
-        public int? UserId { get; set; }
+        public int? UserId { get; set; }        
+        public int? TipoNaturaleza { get; set; }
         public int? UbicacionOrigenId { get; set; }
         public int? UbicacionDestinoId { get; set; }
         public int? ZonaTransporterId { get; set; }
         public int? EstadoOfertaId { get; set; }
+
+        public List<VehiculoDTO>? ListVehiculo { get; set; }
     }
 }

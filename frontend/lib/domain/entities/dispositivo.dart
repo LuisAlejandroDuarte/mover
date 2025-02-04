@@ -18,6 +18,27 @@ class Dispositivos {
       this.activo = false,
       this.userId = 0});
 
+  Dispositivos copyWith({
+    int? id,
+    String? tokenNotificacion,
+    String? uniqueDeviceId,
+    String? modelo,
+    DateTime? fechaRegistro,
+    DateTime? ultimaConexion,
+    bool? activo,
+    int? userId,
+  }) {
+    return Dispositivos(
+        id: id ?? this.id,
+        tokenNotificacion: tokenNotificacion ?? this.tokenNotificacion,
+        uniqueDeviceId: uniqueDeviceId ?? this.uniqueDeviceId,
+        modelo: modelo ?? this.modelo,
+        fechaRegistro: fechaRegistro ?? this.fechaRegistro,
+        ultimaConexion: ultimaConexion ?? this.ultimaConexion,
+        activo: activo ?? this.activo,
+        userId: userId ?? this.userId);
+  }
+
   factory Dispositivos.fromJson(Map<String, dynamic> json) {
     return Dispositivos(
         id: json['id'],
