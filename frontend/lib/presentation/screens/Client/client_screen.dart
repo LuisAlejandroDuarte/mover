@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Widget/widgets.dart';
+import 'package:flutter/services.dart';
 
 class ClientScreen extends StatefulWidget {
   final Widget initialContent;
@@ -33,25 +34,59 @@ class _ClientScreenState extends State<ClientScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_currentTitulo),
-        leading: Builder(
+    // ignore: deprecated_member_use
+    return WillPopScope(
+      onWillPop: () async {
+        bool salir = await mostrarDialogoSalir(context);
+        return salir;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(_currentTitulo),
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              );
+            },
+          ),
+        ),
+        drawer: ClientDrawer(onSelect: (Widget widget, String titulo) {
+          _updateContent(widget, titulo);
+          Navigator.of(context)
+              .pop(); // Cierra el Drawer después de seleccionar
+        }),
+        body: _currentWidget,
+      ),
+    );
+  }
+
+  Future<bool> mostrarDialogoSalir(BuildContext context) async {
+    return await showDialog(
+          context: context,
+          barrierDismissible: false, // Evita cerrar tocando fuera del diálogo
           builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
+            return AlertDialog(
+              title: const Text("Salir de la aplicación"),
+              content: const Text("¿Estás seguro de que deseas salir?"),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: const Text("No"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    SystemNavigator.pop(); // Cierra la aplicación
+                  },
+                  child: const Text("Sí"),
+                ),
+              ],
             );
           },
-        ),
-      ),
-      drawer: ClientDrawer(onSelect: (Widget widget, String titulo) {
-        _updateContent(widget, titulo);
-        Navigator.of(context).pop(); // Cierra el Drawer después de seleccionar
-      }),
-      body: _currentWidget,
-    );
+        ) ??
+        false;
   }
 }

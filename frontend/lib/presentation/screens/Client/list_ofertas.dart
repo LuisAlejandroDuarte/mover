@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/domain.dart';
-import 'package:frontend/utils/storage/user_storage.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../utils/storage/storagex.dart';

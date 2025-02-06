@@ -18,6 +18,32 @@ class ClientDrawer extends ConsumerStatefulWidget {
 class _ClientDrawerState extends ConsumerState<ClientDrawer> {
   User? user;
   UserStorage? userStorage = UserStorage();
+
+  String nombre = '';
+  String email = '';
+  Future<void> cargarDatos() async {
+    user = await userStorage!.get();
+
+    setState(() {
+      if (user!.tipoNaturaleza == 1) {
+        nombre =
+            '${user!.personaNatural.nombre} ${user!.personaNatural.apellido}';
+        email = user!.personaNatural.email;
+      }
+
+      if (user!.tipoNaturaleza == 2) {
+        nombre = '${user!.empresa.razonSocial}';
+        email = user!.empresa.email;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    cargarDatos();
+  }
+
   Future<void> _logout() async {
     user = await userStorage!.get();
     User userupdate = user!.copyWith(estadoUsuarioId: 3);
@@ -36,12 +62,12 @@ class _ClientDrawerState extends ConsumerState<ClientDrawer> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          const UserAccountsDrawerHeader(
-            accountName: Text('Nombre Cliente'),
-            accountEmail: Text('cliente@example.com'),
-            currentAccountPicture: CircleAvatar(
-              backgroundImage: NetworkImage('https://via.placeholder.com/150'),
-            ),
+          UserAccountsDrawerHeader(
+            accountName: Text(nombre),
+            accountEmail: Text(email),
+            // currentAccountPicture: const CircleAvatar(
+            //   backgroundImage: NetworkImage('https://via.placeholder.com/150'),
+            // ),
           ),
           ListTile(
             leading: const Icon(Icons.add),

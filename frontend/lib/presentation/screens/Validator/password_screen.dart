@@ -3,18 +3,19 @@ import 'package:frontend/domain/entities/user.dart';
 import 'package:frontend/utils/storage/user_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bcrypt/bcrypt.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Widget/widgets.dart';
+import '../../providers/providers.dart';
 
-class PasswordScreen extends StatefulWidget {
+class PasswordScreen extends ConsumerStatefulWidget {
   const PasswordScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _PasswordScreenState createState() => _PasswordScreenState();
+  PasswordScreenState createState() => PasswordScreenState();
 }
 
-class _PasswordScreenState extends State<PasswordScreen> {
+class PasswordScreenState extends ConsumerState<PasswordScreen> {
   final TextEditingController _passwordController = TextEditingController();
   UserStorage userStorage = UserStorage();
   User? user;
@@ -23,8 +24,16 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
   Future<User> getUserById() async {
     user = await userStorage.get();
-
     return user!;
+  }
+
+  void updateEstado() async {
+    user = await userStorage.get();
+    if (user != null) {
+      User userUpdate = user!.copyWith(estadoUsuarioId: 1);
+      final userRepository = ref.watch(userRepositoryProvider);
+      await userRepository.editEstadoUser(userUpdate);
+    }
   }
 
   void _validateAndNavigate(User user) async {
@@ -34,7 +43,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
     if (!isValid) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Contraseña invalida'),
+          content: Text('Contraseña inválida'),
         ),
       );
     } else {
@@ -46,8 +55,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
         context.push('/listServicios');
       }
 
-      //context.push('/selecttypeuser');
-      //await userStorage.save(user);
+      updateEstado();
     }
   }
 
@@ -67,7 +75,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
         future: getUserById(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Loading(); // Pantalla de carga mientras el Future se resuelve
+            return const Loading();
           } else if (snapshot.hasError) {
             return const Center(child: Text('Error al cargar los datos.'));
           } else if (!snapshot.hasData) {
@@ -79,7 +87,6 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Text(snapshot.data!.nombre),
                     TextField(
                       controller: _passwordController,
                       obscureText: _obscureText,

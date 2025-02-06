@@ -35,3 +35,5 @@ export 'Register/PersonaNatural/datos_persona_natural_screen.dart';
 export 'Register/Empresa/datos_empresa_screen.dart';
 export 'Register/PersonaNatural/credencial_persona_screen.dart';
 export 'Register/Empresa/credencial_empresa_screen.dart';
+export 'Transportista/add_conductor_screen.dart';
+export 'Transportista/list_conductores_screen.dart';

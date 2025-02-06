@@ -110,6 +110,7 @@ class _DatosPersonaNaturalScreenState
     // Por ejemplo, actualizar el objeto personaNatural y luego guardarlo en storage
 
     // Navegación a la siguiente pantalla
+    if (user!.id != 0) {}
     // ignore: use_build_context_synchronously
     context.push('/credencialpersona');
   }
