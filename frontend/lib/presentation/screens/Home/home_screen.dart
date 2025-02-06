@@ -22,7 +22,7 @@ Future<Dispositivos?> validarTokenExistToken(BuildContext context) async {
     await userStorage.save(user);
     final dispositivo = await dispositivoNotifier
         .getDispositivoByDeviceId(kDispositivo!.uniqueDeviceId);
-
+    await userStorage.save(dispositivo.user);
     return dispositivo;
   } catch (e) {
     // Manejo del error de forma segura
@@ -70,30 +70,32 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         } else if (snapshot.hasError) {
           return const Text('Error occurred');
-        } else if (snapshot.data == null ||
+        } else if (snapshot.data!.userId == -1 ||
             snapshot.data!.uniqueDeviceId.isEmpty) {
           return const SelectTypeUserScreen();
         } else {
           return FutureBuilder<bool>(
-            future: validarExistModel(snapshot.data!.modelo),
-            builder: (context, modelSnapshot) {
-              saveStorageDispositivo(snapshot.data!);
-              if (modelSnapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: SpinKitFadingCircle(
-                    color: Colors.blueAccent,
-                    size: 50.0,
-                  ),
-                );
-              } else if (modelSnapshot.hasError || !modelSnapshot.data!) {
-                // Si hay un error o los modelos no coinciden, redirige a RegisterScreen
-                return const SelectTypeUserScreen();
-              } else {
-                // Si los modelos coinciden, redirige a PasswordScreen
-                return PasswordScreen(userId: snapshot.data!.userId);
-              }
-            },
-          );
+              future: validarExistModel(snapshot.data!.modelo),
+              builder: (context, modelSnapshot) {
+                saveStorageDispositivo(snapshot.data!);
+                if (modelSnapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: SpinKitFadingCircle(
+                      color: Colors.blueAccent,
+                      size: 50.0,
+                    ),
+                  );
+                } else if (modelSnapshot.hasError || !modelSnapshot.data!) {
+                  // Si hay un error o los modelos no coinciden, redirige a RegisterScreen
+                  return const SelectTypeUserScreen();
+                } else if (snapshot.data!.user.estadoUsuarioId == 3) {
+                  // Si los modelos coinciden, redirige a PasswordScreen
+
+                  return const SelectTypeUserScreen();
+                } else {
+                  return const PasswordScreen();
+                }
+              });
         }
       },
     );

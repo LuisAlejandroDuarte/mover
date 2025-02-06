@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/domain/domain.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../utils/storage/storagex.dart';
 
 class DatosEmpresaScreen extends StatefulWidget {
   const DatosEmpresaScreen({super.key});
@@ -9,6 +12,10 @@ class DatosEmpresaScreen extends StatefulWidget {
 }
 
 class _DatosEmpresaScreenState extends State<DatosEmpresaScreen> {
+  User? user;
+  Empresa? empresa;
+  EmpresaStorage empresaStorage = EmpresaStorage();
+  UserStorage userStorage = UserStorage();
   final TextEditingController _nitController = TextEditingController();
   final TextEditingController _razonSocialController = TextEditingController();
   final TextEditingController _representanteController =
@@ -17,7 +24,7 @@ class _DatosEmpresaScreenState extends State<DatosEmpresaScreen> {
   final TextEditingController _telefonoController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
 
-  void _onAccept() {
+  void _onAccept() async {
     if (_nitController.text.trim().isEmpty ||
         _razonSocialController.text.trim().isEmpty ||
         _representanteController.text.trim().isEmpty ||
@@ -33,8 +40,21 @@ class _DatosEmpresaScreenState extends State<DatosEmpresaScreen> {
       return;
     }
 
-    // TODO: Agregar lógica para guardar los datos de la empresa.
-    context.push('/nextScreen'); // Reemplazar con la ruta deseada.
+    user = await userStorage.get();
+
+    Empresa empresanew = Empresa(
+        nit: _nitController.text,
+        razonSocial: _razonSocialController.text,
+        representanteLegal: _representanteController.text,
+        direccion: _direccionController.text,
+        email: _emailController.text,
+        telefono: _telefonoController.text);
+
+    User updateUser = user!.copyWith(empresa: empresanew);
+    await userStorage.save(updateUser);
+
+    // ignore: use_build_context_synchronously
+    context.push('/credencialempresa'); // Reemplazar con la ruta deseada.
   }
 
   Widget _buildTextField(

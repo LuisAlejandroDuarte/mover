@@ -5,7 +5,7 @@ namespace Mover.Entities.Interfaces.Dispositivos.Crear
 {
     public interface ICrearDispositivoRepository
     {
-        Task<int?> Create(DispositivoDTO dispositivoDTO);
+        Task<DispositivoDTO> Create(DispositivoDTO dispositivoDTO);
 
     }
 }

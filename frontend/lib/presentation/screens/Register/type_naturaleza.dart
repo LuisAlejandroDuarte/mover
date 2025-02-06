@@ -30,12 +30,32 @@ class _TypeNaturalezaState extends State<TypeNaturaleza> {
   }
 
   Future<void> selectedTipoNaturaleza(int? tipo) async {
-    if (user == null) return;
+    if (user == null || tipo == null) return;
+
     User updateUser = user!.copyWith(tipoNaturaleza: tipo);
     await userStorage.save(updateUser);
-    setState(() {
-      user = updateUser;
-    });
+
+    user = updateUser;
+    _navigate(tipo);
+    setState(() {});
+  }
+
+  void _navigate(int tipo) {
+    final bool isNewUser = user!.id == 0;
+
+    if (tipo == 1) {
+      if (isNewUser || user!.personaNatural.id == 0) {
+        context.push('/datospersonanatural');
+      } else {
+        context.push('/passwordscreen');
+      }
+    } else if (tipo == 2) {
+      if (isNewUser || user!.empresa.id == 0) {
+        context.push('/datosempresa');
+      } else {
+        context.push('/passwordscreen');
+      }
+    }
   }
 
   void navigateBack() {
@@ -66,8 +86,6 @@ class _TypeNaturalezaState extends State<TypeNaturaleza> {
               ElevatedButton(
                 onPressed: () {
                   selectedTipoNaturaleza(TipoNaturaleza.persona.value);
-
-                  context.push('/datospersonanatural');
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 30.0),
@@ -92,7 +110,6 @@ class _TypeNaturalezaState extends State<TypeNaturaleza> {
               ElevatedButton(
                 onPressed: () {
                   selectedTipoNaturaleza(TipoNaturaleza.empresa.value);
-                  context.push('/datosempresa');
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 30.0),

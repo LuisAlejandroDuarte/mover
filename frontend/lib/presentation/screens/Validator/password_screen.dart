@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/domain/entities/user.dart';
 import 'package:frontend/utils/storage/user_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bcrypt/bcrypt.dart';
 
-import '../../providers/providers.dart';
 import '../../Widget/widgets.dart';
 
 class PasswordScreen extends StatefulWidget {
-  final int userId;
-
-  const PasswordScreen({super.key, required this.userId});
+  const PasswordScreen({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -25,10 +21,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
   bool _obscureText = true;
   bool _isNavigating = false;
 
-  Future<User> getUserById(int id) async {
-    final container = ProviderContainer();
-    final userNotifier = container.read(userProvider(id).notifier);
-    return await userNotifier.getById(id);
+  Future<User> getUserById() async {
+    user = await userStorage.get();
+
+    return user!;
   }
 
   void _validateAndNavigate(User user) async {
@@ -46,6 +42,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
       if (user.tipoUserId == 2) {
         context.push('/listOfertas');
       }
+      if (user.tipoUserId == 3) {
+        context.push('/listServicios');
+      }
+
       //context.push('/selecttypeuser');
       //await userStorage.save(user);
     }
@@ -64,7 +64,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
         title: const Text('Digita la contraseña'),
       ),
       body: FutureBuilder<User>(
-        future: getUserById(widget.userId),
+        future: getUserById(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Loading(); // Pantalla de carga mientras el Future se resuelve

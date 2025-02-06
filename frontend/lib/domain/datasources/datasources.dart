@@ -16,3 +16,5 @@ export 'ubicacion_datasource.dart';
 export 'georeferencia/ciudad_datasource.dart';
 export 'georeferencia/departamento_datasource.dart';
 export 'georeferencia/pais_datasource.dart';
+export 'persona_natural_datasource.dart';
+export 'empresa_datasource.dart';

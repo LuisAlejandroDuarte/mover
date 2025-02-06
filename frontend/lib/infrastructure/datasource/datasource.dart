@@ -15,3 +15,5 @@ export 'zona_transporter_datasorce_impl.dart';
 export 'georeferencia/ciudad_datasource_impl.dart';
 export 'georeferencia/pais_datasource_impl.dart';
 export 'georeferencia/departamento_datasource_impl.dart';
+export 'empresa_datasource_impl.dart';
+export 'persona_natural_datasource_impl.dart';

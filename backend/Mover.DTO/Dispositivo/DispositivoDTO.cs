@@ -1,4 +1,6 @@
 ﻿
+using Mover.DTO.User;
+
 namespace Mover.DTO.Dispositivo
 {
     public class DispositivoDTO
@@ -11,6 +13,8 @@ namespace Mover.DTO.Dispositivo
         public DateTime? FechaRegistro { get; set; } = null;
         public DateTime? UltimaConexion { get; set; } = null;
         public bool? Activo { get; set; }
+
+        public UserDTO? User { get; set; }
         
     }
 }

@@ -146,6 +146,10 @@ namespace Mover.Repositories.EFCore.DataContext
                     {
                         Nombre = "Inactivo"
                     });
+                    EstadoUsuario.Add(new()
+                    {
+                        Nombre = "Sesión cerrada"
+                    });
                 }
 
                 if (!EstadoOferta.Any())

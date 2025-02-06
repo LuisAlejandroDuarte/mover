@@ -1,15 +1,16 @@
 ﻿
+using Mover.DTO.Dispositivo;
 using Mover.UseCasesPorts.Dispositivos.Crear;
 
 namespace Mover.Presenter.Dispositivo.Crear
 {
-    public class CrearDispositivoPresenter : ICrearDispositivoOutPutPort, IPresenter<int?>
+    public class CrearDispositivoPresenter : ICrearDispositivoOutPutPort, IPresenter<DispositivoDTO?>
     {
-        public int? Content { get; private set; }
+        public DispositivoDTO? Content { get; private set; }
 
-        public Task Handle(int? id)
+        public Task Handle(DispositivoDTO? dispositivo)
         {
-            Content = id;
+            Content = dispositivo;
             return Task.CompletedTask;
         }
     }

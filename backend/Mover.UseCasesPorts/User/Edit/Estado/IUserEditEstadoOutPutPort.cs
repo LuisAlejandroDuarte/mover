@@ -2,8 +2,8 @@
 
 namespace Mover.UseCasesPorts.User.Edit.Estado
 {
-    public interface IUserEditEstadoOotPutPort
+    public interface IUserEditEstadoOutPutPort
     {            
-        Task UserEditEstado(UserDTO userDTO);
+        Task UserEditEstado(bool result);
     }
 }

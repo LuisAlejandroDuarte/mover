@@ -26,10 +26,10 @@ namespace Mover.Controllers.Dispositivo.Crear
 
         [HttpPost]
         [Authorize]
-        public async Task<int?> CrearDispositivo(DispositivoDTO  dispositivoDTO)
+        public async Task<DispositivoDTO?> CrearDispositivo(DispositivoDTO  dispositivoDTO)
         {
             await this.crearDispositivoInPutPort.Handle(dispositivoDTO);
-            return ((IPresenter<int?>)crearDispositivoOutPutPort).Content;
+            return ((IPresenter<DispositivoDTO?>)crearDispositivoOutPutPort).Content;
         }
     }
 }

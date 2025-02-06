@@ -20,9 +20,9 @@ namespace Mover.UseCases.Dispositivos.crear
 
         public async Task Handle(DispositivoDTO dispositivoDTO)
         {
-            int? id= await  crearDispositivoRepository.Create(dispositivoDTO);
+            DispositivoDTO? dispositivo= await  crearDispositivoRepository.Create(dispositivoDTO);
 
-            await crearDispositivoOutPutPort.Handle(id);
+            await crearDispositivoOutPutPort.Handle(dispositivo);
 
         }
     }

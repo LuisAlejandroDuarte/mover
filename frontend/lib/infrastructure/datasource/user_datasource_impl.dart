@@ -66,4 +66,25 @@ class UserDataSourceImpl implements UserDataSource {
       rethrow;
     }
   }
+
+  @override
+  Future<bool> editEstadoUser(User user) async {
+    try {
+      final userJson = user.toJson();
+      final response = await _dio.put('EditarEstadoUser', data: userJson);
+
+      if (response.statusCode == 200) {
+        return response.data;
+      } else {
+        final errorMessage = response.data['Message'] ?? 'Unknown error';
+        throw Exception(errorMessage);
+      }
+    } on DioException catch (dioError) {
+      // Manejo del DioError
+      throw Exception(dioError.response?.data['message'] ?? 'Unknown error');
+    } catch (e) {
+      // Si necesitas propagar el error sin modificarlo, usa rethrow
+      rethrow;
+    }
+  }
 }

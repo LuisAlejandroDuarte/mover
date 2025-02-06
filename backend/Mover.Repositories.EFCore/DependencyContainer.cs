@@ -94,6 +94,12 @@ using Mover.Entities.Interfaces.Georeferencia.Departamento.Get.ByIdPais;
 using Mover.Repositories.EFCore.Repositories.Georeferencia.Departamento.Get.ByIdPais;
 using Mover.Entities.Interfaces.Georeferencia.Ciudad.Get.ByIdDepartamento;
 using Mover.Repositories.EFCore.Repositories.Georeferencia.Ciudad.Get.ByIdDepartamento;
+using Mover.Entities.Interfaces.User.Edit.Estado;
+using Mover.Repositories.EFCore.Repositories.User.Edit.Estado;
+using Mover.Entities.Interfaces.PersonaNatural.Crear;
+using Mover.Entities.Interfaces.Empresa.Crear;
+using Mover.Repositories.EFCore.Repositories.PersonaNatural.Crear;
+using Mover.Repositories.EFCore.Repositories.Empresa.Crear;
 
 namespace Mover.Repositories.EFCore
 {
@@ -125,6 +131,16 @@ namespace Mover.Repositories.EFCore
             //User
             services.AddScoped<ICreearUserRepository, CrearUserRepository>();
             services.AddScoped<IGetUserByIdRepository, GetUserByIdRespository>();
+            services.AddScoped<IUserEditarEstadoRepository, EditarEstadoUserRepository>();
+
+
+            //PersonaNatural
+
+            services.AddScoped<ICrearPersonaNaturalRepository,CrearPersonaNaturalRepository>();
+
+            //Empresa
+
+            services.AddScoped<IEmpresaCrearRepository, CrearEmpresaRepository>();
 
             //Categoria 
             services.AddScoped<IGetAllCategoriaRepository, GetAllCategoriaRepository>();

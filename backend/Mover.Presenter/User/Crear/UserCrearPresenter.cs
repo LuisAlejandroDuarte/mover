@@ -1,5 +1,4 @@
 ﻿using Mover.DTO.User;
-using Mover.Entities.POCOEntities;
 using Mover.UseCasesPorts.User.Crear;
 
 namespace Mover.Presenter.User.Crear

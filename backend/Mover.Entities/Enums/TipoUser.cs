@@ -9,7 +9,7 @@ namespace Mover.Entities.Enums
 
     public enum TipoNaturaleza
     {
-        Persona,
-        Empresa
+        Persona=1,
+        Empresa=2
     }
 }

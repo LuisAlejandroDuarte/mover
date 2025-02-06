@@ -2,6 +2,7 @@
 using AutoMapper;
 using Mover.DTO.Dispositivo;
 using Mover.Entities.Interfaces.Dispositivos.Crear;
+using Mover.Entities.POCOEntities;
 using Mover.Repositories.EFCore.DataContext;
 
 namespace Mover.Repositories.EFCore.Repositories.Dispositivos.crear
@@ -18,13 +19,23 @@ namespace Mover.Repositories.EFCore.Repositories.Dispositivos.crear
             this.imapper = imapper;
         }
 
-        public async Task<int?> Create(DispositivoDTO dispositivoDTO)
-        {            
+        public async Task<DispositivoDTO> Create(DispositivoDTO dispositivoDTO)
+        {
+
+
+            if (dispositivoDTO.User.TipoNaturaleza == 1)
+                dispositivoDTO.User.Empresa = null;
+
+            if (dispositivoDTO.User.TipoNaturaleza == 2)
+                dispositivoDTO.User.PersonaNatural = null;
 
             var dispositivo = this.imapper.Map<Mover.Entities.POCOEntities.Dispositivos>(dispositivoDTO);
             this.moverContext.Add(dispositivo);
             await this.moverContext.SaveChangesAsync();
-            return dispositivo.Id;
+
+            var result = this.imapper.Map<DispositivoDTO>(dispositivo);
+
+            return result;
         }
 
     }

@@ -19,4 +19,9 @@ class UserRepositorieImpl implements UserRepositorio {
   Future<User> getById(int id) async {
     return await userDataSource.getById(id);
   }
+
+  @override
+  Future<bool> editEstadoUser(User user) async {
+    return await userDataSource.editEstadoUser(user);
+  }
 }

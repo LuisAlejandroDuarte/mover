@@ -6,7 +6,7 @@ class DispositivoRepositorieImpl extends DispositivosRepositories {
   DispositivoRepositorieImpl({required this.dispositivosDataSource});
 
   @override
-  Future<int> addDispositivo(Dispositivos dispositivos) async {
+  Future<Dispositivos> addDispositivo(Dispositivos dispositivos) async {
     return await dispositivosDataSource.addDispositivo(dispositivos);
   }
 

@@ -16,3 +16,5 @@ export 'ubicacion_repositorie_impl.dart';
 export 'georeferencia/ciudad_repositorie_impl.dart';
 export 'georeferencia/departamento_repositorie_impl.dart';
 export 'georeferencia/pais_repositorie_impl.dart';
+export 'empresa_repositorie_impl.dart';
+export 'persona_natural_repositorie_impl.dart';

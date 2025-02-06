@@ -25,6 +25,10 @@ class UserNotifier extends StateNotifier<UserState> {
   Future<User> getById(int id) async {
     return userRepositorio.getById(id);
   }
+
+  Future<bool> editEstadoUser() async {
+    return await userRepositorio.editEstadoUser(state.user!);
+  }
 }
 
 class UserState {

@@ -1,7 +1,9 @@
-﻿namespace Mover.UseCasesPorts.Dispositivos.Crear
+﻿using Mover.DTO.Dispositivo;
+
+namespace Mover.UseCasesPorts.Dispositivos.Crear
 {
     public interface ICrearDispositivoOutPutPort
     {
-        Task Handle(int? id);
+        Task Handle(DispositivoDTO? id);
     }
 }

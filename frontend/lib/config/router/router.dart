@@ -17,6 +17,11 @@ final GoRouter router = GoRouter(
     ),
 
     GoRoute(
+      path: '/passwordscreen',
+      builder: (context, state) => const PasswordScreen(),
+    ),
+
+    GoRoute(
       path: '/selecttypeconductor',
       builder: (context, state) => const TypeConductorScreen(),
     ),
@@ -47,6 +52,11 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/credencialpersona',
       builder: (context, state) => const CredencialPersonaScreen(),
+    ),
+
+    GoRoute(
+      path: '/credencialempresa',
+      builder: (context, state) => const CredencialEmpresaScreen(),
     ),
 
     GoRoute(
@@ -160,7 +170,7 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: '/listServicios',
-      builder: (context, state) => const ListServicios(),
+      builder: (context, state) => const TransportistaScreen(),
     ),
 
     // GoRoute(

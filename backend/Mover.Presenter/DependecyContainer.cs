@@ -11,6 +11,7 @@ using Mover.Presenter.ConductorAutorizado.ListByUser;
 using Mover.Presenter.Dispositivo.Crear;
 using Mover.Presenter.Dispositivo.Get.ByDeviceId;
 using Mover.Presenter.Dispositivo.Get.ByToken;
+using Mover.Presenter.Empresa.Crear;
 using Mover.Presenter.Equipo.Crear;
 using Mover.Presenter.Equipo.Editar;
 using Mover.Presenter.Equipo.Eliminar;
@@ -31,11 +32,13 @@ using Mover.Presenter.Oferta.Editar;
 using Mover.Presenter.Oferta.Eliminar;
 using Mover.Presenter.Oferta.ListaByUser;
 using Mover.Presenter.ParametrosVehiculo;
+using Mover.Presenter.PersonaNatural.Crear;
 using Mover.Presenter.Referencia.Get.ByIdMarca;
 using Mover.Presenter.TipoIdentificacion.Listar;
 using Mover.Presenter.Ubicacion.Crear;
 using Mover.Presenter.Ubicacion.Editar;
 using Mover.Presenter.User.Crear;
+using Mover.Presenter.User.Edit.Estado;
 using Mover.Presenter.User.Get.ById;
 using Mover.Presenter.Vehiculo.Crear;
 using Mover.Presenter.Vehiculo.Editar;
@@ -53,6 +56,7 @@ using Mover.UseCasesPorts.ConductorAutorizado.ListaByUser;
 using Mover.UseCasesPorts.Dispositivos.Crear;
 using Mover.UseCasesPorts.Dispositivos.Get.ByDeviceId;
 using Mover.UseCasesPorts.Dispositivos.Get.ByToken;
+using Mover.UseCasesPorts.Empresa.Crear;
 using Mover.UseCasesPorts.Equipo.Crear;
 using Mover.UseCasesPorts.Equipo.Editar;
 using Mover.UseCasesPorts.Equipo.Eliminar;
@@ -73,11 +77,13 @@ using Mover.UseCasesPorts.Oferta.Editar;
 using Mover.UseCasesPorts.Oferta.Eliminar;
 using Mover.UseCasesPorts.Oferta.ListaByUser;
 using Mover.UseCasesPorts.ParametrosVehiculo;
+using Mover.UseCasesPorts.PersonaNatural.Crear;
 using Mover.UseCasesPorts.Referencia.Get.ByIdMarca;
 using Mover.UseCasesPorts.TipoIdentificacion.Listar;
 using Mover.UseCasesPorts.Ubicacion.Crear;
 using Mover.UseCasesPorts.Ubicacion.Editar;
 using Mover.UseCasesPorts.User.Crear;
+using Mover.UseCasesPorts.User.Edit.Estado;
 using Mover.UseCasesPorts.User.Get.ById;
 using Mover.UseCasesPorts.Vehiculo.Crear;
 using Mover.UseCasesPorts.Vehiculo.Editar;
@@ -114,7 +120,15 @@ namespace Mover.Presenter
             //User
             services.AddScoped<IUserCrearOutPutPort, UserCrearPresenter>();
             services.AddScoped<IGetUserByIdOutPutPort, GetUserByIdPresenter>();
+            services.AddScoped<IUserEditEstadoOutPutPort, UserEditarEstadoPresenter>();
 
+            //PersonaNatural
+
+            services.AddScoped<IPersonaNaturalCrearOutPutPort,PersonaNaturalCrearPresenter>();
+
+            //Empresa
+
+            services.AddScoped<IEmpresaCrearOutPutPort, EmpresaCrearPresenter>();
 
             //TIPO_IDENTIFIFACION            
             services.AddScoped<ITipoIdentificaionOutPutPort, ListarTipoIdentificacionPresenter>();

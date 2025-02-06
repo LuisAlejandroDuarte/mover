@@ -14,14 +14,14 @@ class DispositivoDatasourceImpl extends DispositivosDataSource {
   }
 
   @override
-  Future<int> addDispositivo(Dispositivos dispositivos) async {
+  Future<Dispositivos> addDispositivo(Dispositivos dispositivos) async {
     try {
       final dispositivoJson = dispositivos.toJson();
       final response =
           await _dio.post('CrearDispositivo', data: dispositivoJson);
 
       if (response.statusCode == 200) {
-        return response.data;
+        return Dispositivos.fromJson(response.data);
       } else {
         final errorMessage = response.data['Message'] ?? 'Unknown error';
         throw Exception(errorMessage);

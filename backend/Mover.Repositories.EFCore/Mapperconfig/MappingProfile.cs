@@ -61,7 +61,9 @@ namespace Mover.Repositories.EFCore.Mapperconfig
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
                 .ReverseMap()
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
-                .ReverseMap();
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+               
+
             CreateMap<MultimediaVehiculo, MultimediaVehiculoDTO>().ReverseMap().ForSourceMember(x=>x.Image,y=>y.DoNotValidate());
 
             CreateMap<PersonaNatural, PersonaNaturalDTO>().ReverseMap();

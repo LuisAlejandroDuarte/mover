@@ -17,3 +17,5 @@ export 'parametrosvehiculo/parametros_vehiculo_repositorie_provider.dart';
 export 'georeferencia/ciudad/ciudad_repositorie_provider.dart';
 export 'georeferencia/departamento/departamento_repositorie_provider.dart';
 export 'georeferencia/pais/pais_repositorie_provider.dart';
+export 'empresa/empresa_repository_provider.dart';
+export 'personanatural/persona_natural_repository_provider.dart';

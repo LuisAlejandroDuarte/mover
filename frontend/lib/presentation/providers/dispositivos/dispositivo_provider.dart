@@ -15,7 +15,7 @@ class DispositivoNotifier extends StateNotifier<String> {
 
   DispositivoNotifier({required this.dispositivoRepositorie}) : super('');
 
-  Future<int> addDispositivo(Dispositivos dispositivo) async {
+  Future<Dispositivos> addDispositivo(Dispositivos dispositivo) async {
     return dispositivoRepositorie.addDispositivo(dispositivo);
   }
 

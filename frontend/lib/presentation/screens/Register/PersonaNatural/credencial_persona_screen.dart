@@ -19,6 +19,8 @@ class _CredencialPersonaScreenState
     extends ConsumerState<CredencialPersonaScreen> {
   User? user;
   Dispositivos? dispositivos;
+  PersonaNatural? personaNatural;
+  PersonaNaturalStorage personaNaturalStorage = PersonaNaturalStorage();
   UserStorage userStorage = UserStorage();
   DispositivoStorage dispositivoStorage = DispositivoStorage();
 
@@ -56,41 +58,64 @@ class _CredencialPersonaScreenState
 
     try {
       user = await userStorage.get();
-      final userRepository = ref.watch(userRepositoryProvider);
 
-      // Creación del usuario
-      user = await userRepository.addUser(user!);
+      if (user!.id == 0) {
+        dispositivos = await dispositivoStorage.get();
 
-      dispositivos = await dispositivoStorage.get();
+        final newDispositivo = Dispositivos(
+            id: null,
+            tokenNotificacion: dispositivos!.tokenNotificacion,
+            modelo: dispositivos!.modelo,
+            fechaRegistro: DateTime.now(),
+            uniqueDeviceId: dispositivos!.uniqueDeviceId,
+            ultimaConexion: DateTime.now(),
+            activo: true,
+            user: user,
+            userId: user!.id);
 
-      final newDispositivo = Dispositivos(
-        id: null,
-        tokenNotificacion: dispositivos!.tokenNotificacion,
-        modelo: dispositivos!.modelo,
-        fechaRegistro: DateTime.now(),
-        uniqueDeviceId: dispositivos!.uniqueDeviceId,
-        ultimaConexion: DateTime.now(),
-        activo: true,
-        userId: user!.id,
-      );
+        final dispositivosRepository = ref.watch(dispositivoRepositoryProvider);
 
-      final dispositivosRepository = ref.watch(dispositivoRepositoryProvider);
+        // Creación del dispositivo
+        Dispositivos? dispositivo =
+            await dispositivosRepository.addDispositivo(newDispositivo);
 
-      // Creación del dispositivo
-      await dispositivosRepository.addDispositivo(newDispositivo);
+        User? newUser = dispositivo.user;
 
-      // Cierra el indicador de carga
-      // ignore: use_build_context_synchronously
-      if (context.mounted) Navigator.pop(context);
+        await userStorage.save(newUser);
 
-      // Muestra un mensaje de éxito
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Usuario creado correctamente'),
-          backgroundColor: Colors.green,
-        ),
-      );
+        // Cierra el indicador de carga
+        // ignore: use_build_context_synchronously
+        if (context.mounted) Navigator.pop(context);
+
+        if (user!.tipoUserId == 2) {
+          // ignore: use_build_context_synchronously
+          context.pushReplacement('/listOfertas');
+        }
+
+        if (user!.tipoUserId == 3) {
+          // ignore: use_build_context_synchronously
+          context.pushReplacement('/listServicios');
+        }
+
+        // Muestra un mensaje de éxito
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Usuario creado correctamente'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        final personaNaturalRepository =
+            ref.watch(personaNaturalRepositoryProvider);
+
+        PersonaNatural? personaNatural = await personaNaturalRepository
+            .crearPersonaNatural(user!.personaNatural);
+
+        User? userNew = user!.copyWith(personaNatural: personaNatural);
+
+        await userStorage.save(userNew);
+      }
     } catch (e) {
       // Cierra el indicador de carga si hay un error
       // ignore: use_build_context_synchronously

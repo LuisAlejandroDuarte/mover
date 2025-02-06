@@ -91,6 +91,12 @@ using Mover.UseCasesPorts.Georeferencia.Departamento.Get.ByIdPais;
 using Mover.UseCases.Georeferencia.Departamento.Get.ByIdPais;
 using Mover.UseCasesPorts.Georeferencia.Ciudad.Get.ByIdDepartamento;
 using Mover.UseCases.Georeferencia.Ciudad.Get.ByIdDepartamento;
+using Mover.UseCasesPorts.User.Edit.Estado;
+using Mover.UseCases.User.Edit.Estado;
+using Mover.UseCasesPorts.PersonaNatural.Crear;
+using Mover.UseCases.PersonaNatural.Crear;
+using Mover.UseCasesPorts.Empresa.Crear;
+using Mover.UseCases.Empresa.Crear;
 
 
 namespace Mover.UseCases
@@ -119,8 +125,18 @@ namespace Mover.UseCases
 
             //USer
             services.AddTransient<IGetUserByIdInPutPort, GetUserByIdInteractor>();
-            services.AddTransient<IUserCrearInPutPort, CrearUserInteractor>();                             
- 
+            services.AddTransient<IUserCrearInPutPort, CrearUserInteractor>();
+            services.AddTransient<IUserEditEstadoInPutPort, EditarEstadoUserInteractor>();
+
+
+            //PersonaNatural
+
+            services.AddTransient<IPersonaNaturalCrearInPutPort,CrearPersonaNaturalInteractor>();
+
+            //Empresa
+
+            services.AddTransient<IEmpresaCrearInPutPort,CrearEmpresaInteractor>();
+
             //TIPO_IDENTIFIFACION
             services.AddTransient<ITipoIdentificaionInPutPort, ListarTipoIdentificacionInteractor>();
 
